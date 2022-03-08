@@ -1,5 +1,9 @@
 package cn.aka.controller;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 import cn.aka.pojo.Income;
 import cn.aka.pojo.PageBean;
 import cn.aka.pojo.ResultBean;
@@ -8,18 +12,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+<<<<<<< HEAD
+=======
+import org.springframework.web.servlet.ModelAndView;
+>>>>>>> origin/master
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-
-@Controller
 public class MyController {
-    @GetMapping(value = "/index")
-    public String index() {
-        return "login";
-    }
+
 
     @GetMapping(value = "/main")
     public String main() {
@@ -92,6 +95,9 @@ public class MyController {
         resultBean.setRows(list);
         return resultBean;
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/master
 }
