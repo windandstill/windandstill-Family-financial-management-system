@@ -6,10 +6,21 @@ import java.util.List;
 
 public interface UserMapper {
 
+
+    User findUserAndRoleByNP(User user);
+
     /**
      * 根据用户名,密码,角色编号来查询user
-     * @param user
-     * @return
      */
-    User findUserAndRoleByNP(User user);
+    User findUserByUsername(User user);
+
+    /**
+     * 根据用户名和密码注册用户
+     */
+    void insertUser(User user);
+
+    /**
+     * 根据uid注册用户等级
+     */
+    void insertUserRole(User user);
 }

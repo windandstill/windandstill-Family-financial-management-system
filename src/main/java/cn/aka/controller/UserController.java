@@ -1,5 +1,6 @@
 package cn.aka.controller;
 
+import cn.aka.pojo.Result;
 import cn.aka.pojo.Role;
 import cn.aka.pojo.User;
 import cn.aka.service.RoleService;
@@ -16,10 +17,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Request;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
-public class LoginController {
+public class UserController {
     @Autowired
     private RoleService roleService;
     @Autowired
@@ -49,6 +52,31 @@ public class LoginController {
     @RequestMapping("sign")
     public String sgin(){
         return "sign";
+    }
+
+    @RequestMapping("gosign")
+    @ResponseBody
+    public Result gosign(User user){
+        User userByUsername = userService.findUserByUsername(user);
+        Result result = new Result();
+        if (userByUsername == null){
+            //创建时间
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            user.setCreatetime(sdf.format(date));
+            //增加用户
+            userService.insertUser(user);
+            //获取用户id
+            User user1=userService.findUserByUsername(user);
+            //角色用户表中增加用户角色
+            user1.setRoleid(user.getRoleid());
+            userService.insertUserRole(user1);
+            result.setErrres("1");
+            result.setErrmsq("注册成功!");
+        }else {
+            result.setErrmsq("注册失败,该用户名已存在!");
+        }
+        return result;
     }
 
 

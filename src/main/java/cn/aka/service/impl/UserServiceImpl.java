@@ -16,4 +16,25 @@ public class UserServiceImpl implements UserService {
     public User findUserAndRoleByNP(User user) {
         return userMapper.findUserAndRoleByNP(user);
     }
+
+    /**
+     * 通过姓名查找用户
+     */
+    public User findUserByUsername(User user) {
+        return userMapper.findUserByUsername(user);
+    }
+
+    /**
+     * 通过用户名和密码来注册用户
+     */
+    public void insertUser(User user) {
+        userMapper.insertUser(user);
+    }
+
+    /**
+     * 根据uid注册用户等级
+     */
+    public void insertUserRole(User user){
+        userMapper.insertUserRole(user);
+    }
 }
