@@ -23,10 +23,10 @@
 		var s_incomer = $("#s_incomer").val();
 		var s_starttime = $("#s_starttime").datetimebox("getValue");
 		var s_endtime = $("#s_endtime").datetimebox("getValue");
-		/*if((s_starttime!="")&&(s_endtime!="")&&(s_starttime>s_endtime)){
-			$.messager.alert("系统提示","起始时间不能大于截止时间！");
-			return;
-		}*/
+		// f((s_starttime!="")&&(s_endtime!="")&&(s_starttime>s_endtime)){
+		// 	$.messager.alert("系统提示","起始时间不能大于截止时间！");
+		// 	return;
+		// }
         $.post("${basePath}produceIncomeTime.do", {incomer : s_incomer,starttime:s_starttime,endtime:s_endtime,roleid:"${currentUser.roleid}",userid:"${currentUser.id}"}, function(result) {
         var result =  [
             {
