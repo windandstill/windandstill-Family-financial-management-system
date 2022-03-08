@@ -36,18 +36,19 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public ModelAndView login(User user, HttpServletRequest request){
+    @ResponseBody
+    public Result login(User user, HttpServletRequest request){
+        Result result = new Result();
         User currentUser = userService.findUserAndRoleByNP(user);
-        ModelAndView modelAndView = new ModelAndView();
-        if (currentUser!=null){
-            request.getSession().setAttribute("currentUser",currentUser);
-            modelAndView.addObject(currentUser);
-            modelAndView.setViewName("main");
+        if (currentUser==null){
+            result.setErrres(101);
+            result.setErrmsg("用户名或者密码错误");
+            result.setInputfocus("inputUsername");
         }else {
-            modelAndView.addObject("roles",roleService.getAllRole());
-            modelAndView.addObject("messageshow","用户名或密码错误");
+            result.setErrres(200);
+            request.getSession().setAttribute("currentUser",currentUser);
         }
-        return modelAndView;
+        return result;
     }
     @RequestMapping("sign")
     public String sgin(){
@@ -71,12 +72,17 @@ public class UserController {
             //角色用户表中增加用户角色
             user1.setRoleid(user.getRoleid());
             userService.insertUserRole(user1);
-            result.setErrres("1");
-            result.setErrmsq("注册成功!");
+            result.setErrres(1);
+            result.setErrmsg("注册成功!");
         }else {
-            result.setErrmsq("注册失败,该用户名已存在!");
+            result.setErrmsg("注册失败,该用户名已存在!");
+            result.setInputfocus("inputUsername");
         }
         return result;
+    }
+    @RequestMapping("main")
+    public String main(){
+        return "main";
     }
 
 

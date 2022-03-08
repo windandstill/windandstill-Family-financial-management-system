@@ -1,22 +1,34 @@
 package cn.aka.pojo;
 
 public class Result {
-    private String errres;
-    private String errmsq;
 
-    public String getErrres() {
+    private Integer errres;
+
+    private String errmsg;
+
+    public Integer getErrres() {
         return errres;
     }
 
-    public void setErrres(String errres) {
+    public void setErrres(Integer errres) {
         this.errres = errres;
     }
 
-    public String getErrmsq() {
-        return errmsq;
+    public String getErrmsg() {
+        return errmsg;
     }
 
-    public void setErrmsq(String errmsq) {
-        this.errmsq = errmsq;
+    public void setErrmsg(String errmsg) {
+        this.errmsg = errmsg;
     }
+
+    public String getInputfocus() {
+        return inputfocus;
+    }
+
+    public void setInputfocus(String inputfocus) {
+        this.inputfocus = inputfocus;
+    }
+
+    private String inputfocus;
 }
