@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
 public class MyController {
 
 

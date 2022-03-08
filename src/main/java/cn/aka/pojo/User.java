@@ -32,10 +32,13 @@ public class User {
 	
 	private String roleIDs=""; // 对应的角色列表id
 	private String roleNames=""; // 对应的角色列表名称
-	
+
+
+
 	public List<Map<Object, Object>> getRoleIDsList() {
 		return roleIDsList;
 	}
+
 	public void setRoleIDsList(List<Map<Object, Object>> roleIDsList) {
 		this.roleIDsList = roleIDsList;
 		if(null!=roleIDsList && roleIDsList.size()>0){
@@ -165,5 +168,5 @@ public class User {
 	public void setUpdatetime(String updatetime) {
 		this.updatetime = updatetime;
 	}
-	
+
 }
