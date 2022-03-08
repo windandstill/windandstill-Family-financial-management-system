@@ -26,7 +26,6 @@
 					<option value="" selected>请选择用户类型...</option>
 					<c:forEach items="${roles }" var="role">
 						<option value="${role.id }">${role.rolename }</option>
-						<option value="${role.id }">${role.rolename }</option>
 					</c:forEach>
 				</select>
 		        <button id="submitbtn" class="btn btn-lg btn-login btn-block" type="button">
@@ -46,7 +45,7 @@
                         <h4 class="modal-title">提示您</h4>
                     </div>
                     <div class="modal-body">
-                        <h4 id="messageshow"></h4>
+                        <h4 id="messageshow">${messageshow}</h4>
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-success" type="button">确定</button>
@@ -62,7 +61,10 @@
 		<script>
 			$(function(){
 				$("#submitbtn").click(function(){
-                    window.location.href="${basePath}main.do";
+					var form = document.forms[0];
+					form.action="${basePath}login.do";
+					form.method="post";
+					form.submit();
 		    	});
 				$(document).keydown(function(event){ 
 					if(event.keyCode == 13){
