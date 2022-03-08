@@ -46,6 +46,10 @@ public class LoginController {
         }
         return modelAndView;
     }
+    @RequestMapping("sign")
+    public String sgin(){
+        return "sign";
+    }
 
 
 }
