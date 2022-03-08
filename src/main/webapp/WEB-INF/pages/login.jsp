@@ -26,7 +26,6 @@
 					<option value="" selected>请选择用户类型...</option>
 					<c:forEach items="${roles }" var="role">
 						<option value="${role.id }">${role.rolename }</option>
-						<option value="${role.id }">${role.rolename }</option>
 					</c:forEach>
 				</select>
 		        <button id="submitbtn" class="btn btn-lg btn-login btn-block" type="button">
