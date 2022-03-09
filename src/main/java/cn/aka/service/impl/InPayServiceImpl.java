@@ -1,6 +1,7 @@
 package cn.aka.service.impl;
 
 import cn.aka.mapper.InPayMapper;
+import cn.aka.pojo.Datadic;
 import cn.aka.pojo.Income;
 import cn.aka.pojo.Pay;
 import cn.aka.service.InPayService;
@@ -14,9 +15,7 @@ import org.springframework.stereotype.Service;
 public class InPayServiceImpl implements InPayService {
     @Autowired
     private InPayMapper inPayMapper;
-    public List<Income> findIncome(Map<String,Object> map) {
-        return inPayMapper.findIncome(map);
-    }
+
 
     public List<Income> getIncomeLine(Map<String,Object> map) {
         return inPayMapper.getIncomeLine(map);
@@ -26,9 +25,7 @@ public class InPayServiceImpl implements InPayService {
         return inPayMapper.getIncomer();
     }
 
-    public List<Pay> findPay(Map<String, Object> map) {
-        return inPayMapper.findPay(map);
-    }
+
 
     public List<Pay> getPayLine(Map<String, Object> map) {
         return inPayMapper.getPayLine(map);
@@ -37,4 +34,14 @@ public class InPayServiceImpl implements InPayService {
     public List<Pay> getPayer() {
         return inPayMapper.getPayer();
     }
+
+    public List<Datadic> getDatadicPay() {
+        return inPayMapper.getDatadicPay();
+    }
+
+    public List<Datadic> getDatadicIncome() {
+        return inPayMapper.getDatadicIncome();
+    }
+
+
 }
