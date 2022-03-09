@@ -175,7 +175,7 @@
 <body style="margin: 1px;">
 <table id="dg" title="证券管理" class="easyui-datagrid" fitColumns="true"
        pagination="true" rownumbers="true"
-       url="/security/securitylist.do?roleid=${currentUser.roleid}&userid=${currentUser.id}"
+       url="${basePath}securitylist.do?roleid=${currentUser.roleid}&userid=${currentUser.id}"
        fit="true" toolbar="#tb" remoteSort="false" multiSort="true">
     <thead>
     <tr>
@@ -192,20 +192,6 @@
         <th field="updatetime" width="100" align="center" sortable="true">修改时间</th> -->
     </tr>
     </thead>
-    <tr>
-        <c:forEach items="${currentUser}" var="row">
-    <tr>
-        <th field="cb" checkbox="true" align="center"></th>
-        <td>${row.id}</td>
-        <td>${row.username}</td>
-        <td>${row.securityname}</td>
-        <td>${row.securitypassword}</td>
-        <td>${row.dataid}</td>
-        <td>${row.starttime}</td>
-        <td>${row.endtime}</td>
-        <td>
-    </tr>
-    </c:forEach>
 </table>
 <div id="tb">
     <div>

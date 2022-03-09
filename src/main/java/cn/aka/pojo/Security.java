@@ -117,4 +117,25 @@ public class Security {
 		this.searchEndtime = searchEndtime;
 	}
 
+	@Override
+	public String toString() {
+		return "Security{" +
+				"id=" + id +
+				", userid=" + userid +
+				", roleid=" + roleid +
+				", securityname='" + securityname + '\'' +
+				", securitypassward='" + securitypassward + '\'' +
+				", company='" + company + '\'' +
+				", dataid=" + dataid +
+				", starttime='" + starttime + '\'' +
+				", endtime='" + endtime + '\'' +
+				", createtime='" + createtime + '\'' +
+				", updatetime='" + updatetime + '\'' +
+				", datadicname='" + datadicname + '\'' +
+				", datadicvalue='" + datadicvalue + '\'' +
+				", username='" + username + '\'' +
+				", searchStarttime='" + searchStarttime + '\'' +
+				", searchEndtime='" + searchEndtime + '\'' +
+				'}';
+	}
 }

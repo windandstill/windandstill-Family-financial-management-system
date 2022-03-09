@@ -3,6 +3,7 @@ package cn.aka.mapper;
 import cn.aka.pojo.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
 
@@ -12,4 +13,10 @@ public interface UserMapper {
      * @return
      */
     User findUserAndRoleByNP(User user);
+
+
+    /**
+     * 查询所有用户
+     */
+    List<User> getAllUsers(Map<String,Object> map);
 }
