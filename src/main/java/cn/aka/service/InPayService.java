@@ -1,4 +1,4 @@
-package cn.aka.mapper;
+package cn.aka.service;
 
 import cn.aka.pojo.Income;
 import cn.aka.pojo.Pay;
@@ -6,7 +6,7 @@ import cn.aka.pojo.Pay;
 import java.util.List;
 import java.util.Map;
 
-public interface InPayMapper {
+public interface InPayService {
     List<Income> findIncome(Map<String,Object> map);
     List<Income> getIncomeLine(Map<String,Object> map);
     List<Income> getIncomer();
