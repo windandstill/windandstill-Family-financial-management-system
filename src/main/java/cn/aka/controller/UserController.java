@@ -117,7 +117,9 @@ public class UserController {
     @RequestMapping("userlist")
     @ResponseBody
     public ResultBean<User> userlist(@RequestParam(value = "page", required = false) String page,
-                                     @RequestParam(value = "rows", required = false) String rows){
+                                     @RequestParam(value = "rows", required = false) String rows,User user){
+
+        System.out.println(user);
         PageBean pageBean = new PageBean((Integer.parseInt(page)-1)*Integer.parseInt(rows), Integer.parseInt(rows));
         List<User> allUserByPage = userService.findAllUserByPage(pageBean);
         ResultBean<User> userResultBean = new ResultBean<User>();
