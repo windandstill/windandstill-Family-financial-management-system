@@ -1,9 +1,6 @@
 package cn.aka.controller;
 
-import cn.aka.pojo.PageBean;
-import cn.aka.pojo.Result;
-import cn.aka.pojo.ResultBean;
-import cn.aka.pojo.User;
+import cn.aka.pojo.*;
 import cn.aka.service.RoleService;
 import cn.aka.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -118,13 +117,21 @@ public class UserController {
     @ResponseBody
     public ResultBean<User> userlist(@RequestParam(value = "page", required = false) String page,
                                      @RequestParam(value = "rows", required = false) String rows,User user){
-
-        System.out.println(user);
-        PageBean pageBean = new PageBean((Integer.parseInt(page)-1)*Integer.parseInt(rows), Integer.parseInt(rows));
-        List<User> allUserByPage = userService.findAllUserByPage(pageBean);
+        PageBean pageBean = new PageBean(Integer.parseInt(page), Integer.parseInt(rows));
+        Map<String, Object> map = new HashMap<String, Object>();
         ResultBean<User> userResultBean = new ResultBean<User>();
+        map.put("username",user.getUsername());
+        map.put("truename",user.getTruename());
+        map.put("appellation",user.getAppellation());
+        map.put("sex",user.getSex());
+        map.put("roleid",user.getRoleid());
+        map.put("start",pageBean.getStart());
+        map.put("pageSize",pageBean.getPageSize());
+        System.out.println(map);
+        int totalUser = userService.findTotalUser(map);
+        List<User> allUserByPage = userService.findAllUserByPage(map);
+        userResultBean.setTotal(totalUser);
         userResultBean.setRows(allUserByPage);
-        userResultBean.setTotal(userService.findTotalUser());
         return userResultBean;
 }
 

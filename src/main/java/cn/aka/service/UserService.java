@@ -1,9 +1,9 @@
 package cn.aka.service;
 
-import cn.aka.pojo.PageBean;
 import cn.aka.pojo.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
     User findUserAndRoleByNP(User user);
@@ -20,10 +20,10 @@ public interface UserService {
     /**
      * 查询所有用户的数量
      */
-    int findTotalUser();
+    int findTotalUser(Map<String, Object> map);
 
     /**
      * 分页查询所有用户
      */
-    List<User> findAllUserByPage(PageBean pageBean);
+    List<User> findAllUserByPage(Map<String, Object> map);
 }

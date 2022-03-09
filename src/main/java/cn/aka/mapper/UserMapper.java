@@ -1,9 +1,9 @@
 package cn.aka.mapper;
 
-import cn.aka.pojo.PageBean;
 import cn.aka.pojo.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
 
@@ -28,11 +28,10 @@ public interface UserMapper {
     /**
      * 查询所有用户的数量
      */
-    int findTotalUser();
+    int findTotalUser(Map<String, Object> map);
 
     /**
      * 查询所有用户
-     * @param pageBean
      */
-    List<User> findAllUserByPage(PageBean pageBean);
+    List<User> findAllUserByPage(Map<String, Object> map);
 }

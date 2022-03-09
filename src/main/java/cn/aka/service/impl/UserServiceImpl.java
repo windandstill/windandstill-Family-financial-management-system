@@ -1,13 +1,13 @@
 package cn.aka.service.impl;
 
 import cn.aka.mapper.UserMapper;
-import cn.aka.pojo.PageBean;
 import cn.aka.pojo.User;
 import cn.aka.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -44,14 +44,14 @@ public class UserServiceImpl implements UserService {
     /**
      * 查询所有用户的数量
      */
-    public int findTotalUser() {
-        return userMapper.findTotalUser();
+    public int findTotalUser(Map<String, Object> map) {
+        return userMapper.findTotalUser(map);
     }
 
     /**
      * 分页查找所有用户
      */
-    public List<User> findAllUserByPage(PageBean pageBean) {
-        return userMapper.findAllUserByPage(pageBean);
+    public List<User> findAllUserByPage(Map<String, Object> map) {
+        return userMapper.findAllUserByPage(map);
     }
 }

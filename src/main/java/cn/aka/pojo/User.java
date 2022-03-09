@@ -53,7 +53,7 @@ public class User {
 			}
 		}
 	}
-	
+
 	public Integer getRoleid() {
 		return roleid;
 	}
