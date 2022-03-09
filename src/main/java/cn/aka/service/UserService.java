@@ -4,9 +4,11 @@ import cn.aka.pojo.PageBean;
 import cn.aka.pojo.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
     User findUserAndRoleByNP(User user);
+    List<User> getAllUsers(Map<String,Object> map);
 
     User findUserByUsername(User user);
 

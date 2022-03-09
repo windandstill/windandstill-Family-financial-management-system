@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.aka.mapper.SecurityMapper">
+
+    <!--查询的使t_security\t_shares\t_role-->
+    <select id="findSecurityById" resultType="security" parameterType="securityVo">
+        SELECT *
+        FROM ffms.t_security a
+        inner join t_user b on a.userid = b.id
+        inner join t_user_role c on a.userid = c.userid
+        inner join t_datadic d on a.dataid = d.id
+        <include refid="securityWhere"/>
+<!--        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>-->
+    </select>
+
+    <select id="findCount" parameterType="securityVo" resultType="int">
+        SELECT COUNT(*)
+        FROM t_security a
+                 inner join t_user b on a.userid = b.id
+                 inner join t_user_role c on a.userid = c.userid
+                 inner join t_datadic d on a.dataid = d.id
+        <include refid="securityWhere"/>
+    </select>
+    <sql id="securityWhere">
+        <where>
+            <if test="username!=null and username!=''">
+                and b.username like '%${username}%'
+            </if>
+            <if test="company!=null and company!=''">
+                and a.company like '%${company}%'
+            </if>
+            <if test="dataid!=null and dataid!=''">
+                and a.dataid = #{dataid}
+            </if>
+            <if test="searchStarttime!=null and searchStarttime!='' ">
+                and a.starttime&gt;=#{searchStarttime}
+            </if>
+            <if test="searchEndtime!=null and searchEndtime!='' ">
+                and a.endtime&lt;=#{searchEndtime}
+            </if>
+            <if test="userid!=null and roleid!=1">
+                and a.userid = #{userid}
+            </if>
+        </where>
+    </sql>
+</mapper>

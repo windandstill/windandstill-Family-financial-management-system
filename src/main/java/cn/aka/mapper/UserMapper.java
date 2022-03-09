@@ -4,6 +4,7 @@ import cn.aka.pojo.PageBean;
 import cn.aka.pojo.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserMapper {
 
@@ -35,4 +36,9 @@ public interface UserMapper {
      * @param pageBean
      */
     List<User> findAllUserByPage(PageBean pageBean);
+
+    /**
+     * 查询所有用户
+     */
+    List<User> getAllUsers(Map<String,Object> map);
 }

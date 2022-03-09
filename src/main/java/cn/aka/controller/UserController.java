@@ -1,9 +1,6 @@
 package cn.aka.controller;
 
-import cn.aka.pojo.PageBean;
-import cn.aka.pojo.Result;
-import cn.aka.pojo.ResultBean;
-import cn.aka.pojo.User;
+import cn.aka.pojo.*;
 import cn.aka.service.RoleService;
 import cn.aka.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +33,8 @@ public class UserController {
         return modelAndView;
     }
 
-    //public ModelAndView index(ModelAndView modelAndView) {
 
-    //}
+
 
     /**
      * 登录用户 并将当前用户放到session中

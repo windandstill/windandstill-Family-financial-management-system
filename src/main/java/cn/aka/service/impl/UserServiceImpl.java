@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import java.util.List;
+import java.util.Map;
+
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -53,5 +56,10 @@ public class UserServiceImpl implements UserService {
      */
     public List<User> findAllUserByPage(PageBean pageBean) {
         return userMapper.findAllUserByPage(pageBean);
+    }
+
+    @Override
+    public List<User> getAllUsers(Map<String,Object> map) {
+        return userMapper.getAllUsers(map);
     }
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.aka.mapper.RoleMapper">
 
-    <select id="getAllRole" resultType="cn.aka.pojo.Role">
+    <select id="getAllRole" resultType="role">
         select * from ffms.t_role
     </select>
 </mapper>
