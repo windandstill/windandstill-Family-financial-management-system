@@ -37,8 +37,4 @@ public interface UserMapper {
      */
     List<User> findAllUserByPage(PageBean pageBean);
 
-    /**
-     * 查询所有用户
-     */
-    List<User> getAllUsers(Map<String,Object> map);
 }

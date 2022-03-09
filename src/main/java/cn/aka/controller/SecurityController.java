@@ -43,7 +43,7 @@ public class SecurityController {
         Map<String, Object> userMap = new HashMap<String, Object>();
         userMap.put("userid", user.getId());
         userMap.put("roleid", user.getRoleid());
-        List<User> allUsers = userService.getAllUsers(userMap);
+        List<User> allUsers = securityService.getAllUsers(userMap);
         mv.addObject("allUsers",allUsers);
         return mv;
     }
