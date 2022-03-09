@@ -26,7 +26,7 @@ public class UserController {
     private UserService userService;
 
     /**
-     * 用把roles放在session里 传递
+     * 查询所有角色返回给login里
      */
     @GetMapping(value = "/index")
     public ModelAndView index(ModelAndView modelAndView) {
@@ -34,9 +34,6 @@ public class UserController {
         modelAndView.setViewName("login");
         return modelAndView;
     }
-
-
-
 
     /**
      * 登录用户 并将当前用户放到session中
@@ -52,7 +49,6 @@ public class UserController {
             result.setInputfocus("inputUsername");
         } else {
             result.setErrres(200);
-            request.getSession().setAttribute("roles",roleService.getAllRole());
             request.getSession().setAttribute("currentUser", currentUser);
             request.getSession().setAttribute("usermessage", currentUser);
         }
@@ -108,8 +104,10 @@ public class UserController {
      * 查询所有用户并跳转到用户信息管理
      */
     @RequestMapping("userManage")
-    public String userManage() {
-        return "userManage";
+    public ModelAndView userManage(ModelAndView modelAndView) {
+        modelAndView.addObject("roles",roleService.getAllRole());
+        modelAndView.setViewName("userManage");
+        return modelAndView;
     }
 
     @RequestMapping("userlist")
