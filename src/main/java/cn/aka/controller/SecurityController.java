@@ -52,7 +52,7 @@ public class SecurityController {
     public ResultBean<Security> list(@RequestParam(value = "page", required = false) String page,
                        @RequestParam(value = "rows", required = false) String rows, SecurityVo securityVo) {
         ResultBean<Security> resultBean = new ResultBean<>();
-        PageBean pageBean = new PageBean(Integer.parseInt(page), Integer.parseInt(rows));
+        PageBean pageBean = new PageBean((Integer.parseInt(page)-1)*(Integer.parseInt(rows)), Integer.parseInt(rows));
         int total = securityService.findCount(securityVo);
         resultBean.setTotal(total);
         List<Security> securities = securityService.findSecurityById(securityVo);
