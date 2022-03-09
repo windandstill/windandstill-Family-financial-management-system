@@ -3,6 +3,7 @@
 <mapper namespace="cn.aka.mapper.UserMapper">
 
 
+
     <select id="getAllRole" resultType="role">
         select * from ffms.t_role
     </select>
@@ -11,4 +12,24 @@
         select u.*, r.id roleid,r.rolename from ffms.t_user u left JOIN ffms.t_user_role ur ON u.id=ur.userid INNER JOIN ffms.t_role r ON ur.roleid = r.id
 where u.username=#{username} and u.password=#{password} and r.id=#{roleid};
     </select>
+
+    <select id="findUserByUsername" resultType="User">
+        select * from ffms.t_user where username=#{username};
+    </select>
+
+    <select id="findAllUserByPage" parameterType="pageBean" resultType="User">
+        select u.*, r.id roleid,r.rolename from ffms.t_user u left JOIN ffms.t_user_role ur ON u.id=ur.userid INNER JOIN ffms.t_role r ON ur.roleid = r.id
+limit #{page} ,#{pageSize};
+    </select>
+    <select id="findTotalUser" resultType="java.lang.Integer">
+        select count(*) from ffms.t_user
+    </select>
+
+    <insert id="insertUser" parameterType="User">
+        insert into ffms.t_user (username,password,createtime) value (#{username},#{password},#{createtime})
+    </insert>
+
+    <insert id="insertUserRole">
+        insert into ffms.t_user_role (userid, roleid) VALUE (#{id},#{roleid})
+    </insert>
 </mapper>
