@@ -18,12 +18,12 @@ public interface UserMapper {
     /**
      * 根据用户名和密码注册用户
      */
-    void insertUser(User user);
+    void addUser(User user);
 
     /**
      * 根据uid注册用户等级
      */
-    void insertUserRole(User user);
+    void addUserRole(User user);
 
     /**
      * 查询所有用户的数量
@@ -34,4 +34,9 @@ public interface UserMapper {
      * 查询所有用户
      */
     List<User> findAllUserByPage(Map<String, Object> map);
+
+    /**
+     * 修改用户
+     */
+    void updateUser(User user);
 }

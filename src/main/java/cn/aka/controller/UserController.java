@@ -77,12 +77,12 @@ public class UserController {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             user.setCreatetime(sdf.format(date));
             //增加用户
-            userService.insertUser(user);
+            userService.addUser(user);
             //获取用户id
             User user1 = userService.findUserByUsername(user);
             //角色用户表中增加用户角色
             user1.setRoleid(user.getRoleid());
-            userService.insertUserRole(user1);
+            userService.addUserRole(user1);
             result.setErrres(1);
             result.setErrmsg("注册成功!");
         } else {
@@ -110,6 +110,9 @@ public class UserController {
         return modelAndView;
     }
 
+    /**
+     * 条件查询用户
+     */
     @RequestMapping("userlist")
     @ResponseBody
     public ResultBean<User> userlist(@RequestParam(value = "page", required = false) String page,
@@ -124,13 +127,52 @@ public class UserController {
         map.put("roleid",user.getRoleid());
         map.put("start",pageBean.getStart());
         map.put("pageSize",pageBean.getPageSize());
-        System.out.println(map);
         int totalUser = userService.findTotalUser(map);
         List<User> allUserByPage = userService.findAllUserByPage(map);
         userResultBean.setTotal(totalUser);
         userResultBean.setRows(allUserByPage);
         return userResultBean;
 }
+
+    @RequestMapping("usersave")
+    @ResponseBody
+    public Result usersave(User user){
+        System.out.println(user);
+        Result result = new Result();
+        if (user.getId() == null){
+            User userByUsername = userService.findUserByUsername(user);
+            if (userByUsername != null){
+                result.setErrmsg("用户名已被使用");
+                return result;
+            }
+            //创建时间
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            user.setCreatetime(sdf.format(date));
+            userService.addUser(user);
+            User user1 = userService.findUserByUsername(user);
+            user1.setRoleid(user.getRoleid());
+            userService.addUserRole(user1);
+            result.setErrres(1);
+            result.setErrmsg("数据添加成功！");
+        }else {
+            User userByUsername = userService.findUserByUsername(user);
+            if (userByUsername!=null && (!(userByUsername.getUsername().equals(user.getUsername())))){
+                result.setErrmsg("用户名已被使用");
+                return result;
+            }
+            //创建时间
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            user.setUpdatetime(sdf.format(date));
+            userService.updateUser(user);
+            result.setErrres(1);
+            result.setErrmsg("数据修改成功！");
+        }
+        return result;
+    }
+
+
 
     @RequestMapping("roleManage")
     public String roleManage() {

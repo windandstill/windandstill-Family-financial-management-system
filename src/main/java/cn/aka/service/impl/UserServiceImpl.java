@@ -19,6 +19,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Override
     public User findUserAndRoleByNP(User user) {
         return userMapper.findUserAndRoleByNP(user);
     }
@@ -26,6 +27,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 通过姓名查找用户
      */
+    @Override
     public User findUserByUsername(User user) {
         return userMapper.findUserByUsername(user);
     }
@@ -33,20 +35,23 @@ public class UserServiceImpl implements UserService {
     /**
      * 通过用户名和密码来注册用户
      */
-    public void insertUser(User user) {
-        userMapper.insertUser(user);
+    @Override
+    public void addUser(User user) {
+        userMapper.addUser(user);
     }
 
     /**
      * 根据uid注册用户等级
      */
-    public void insertUserRole(User user){
-        userMapper.insertUserRole(user);
+    @Override
+    public void addUserRole(User user){
+        userMapper.addUserRole(user);
     }
 
     /**
      * 查询所有用户的数量
      */
+    @Override
     public int findTotalUser(Map<String, Object> map) {
         return userMapper.findTotalUser(map);
     }
@@ -54,8 +59,18 @@ public class UserServiceImpl implements UserService {
     /**
      * 分页查找所有用户
      */
+    @Override
     public List<User> findAllUserByPage(Map<String, Object> map) {
         return userMapper.findAllUserByPage(map);
     }
+
+    /**
+     * 修改用户
+     */
+    @Override
+    public void updateUser(User user) {
+        userMapper.updateUser(user);
+    }
+
 
 }

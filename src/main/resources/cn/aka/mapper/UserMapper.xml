@@ -20,6 +20,49 @@
                 </if>
         </where>
     </sql>
+    <update id="updateUser" parameterType="user">
+        update ffms.t_user a,ffms.t_user_role b
+        <set>
+            <if test="username!=null and username!='' ">
+                a.username=#{username},
+            </if>
+            <if test="password!=null and password!='' ">
+                a.password=#{password},
+            </if>
+            <if test="truename!=null and truename!='' ">
+                a.truename=#{truename},
+            </if>
+            <if test="email!=null and email!='' ">
+                a.email=#{email},
+            </if>
+            <if test="phone!=null and phone!='' ">
+                a.phone=#{phone},
+            </if>
+            <if test="address!=null and address!='' ">
+                a.address=#{address},
+            </if>
+            <if test="sex!=null and sex!='' ">
+                a.sex=#{sex},
+            </if>
+            <if test="age!=null and age!='' ">
+                a.age=#{age},
+            </if>
+            <if test="appellation!=null and appellation!='' ">
+                a.appellation=#{appellation},
+            </if>
+            <if test="salary!=null and salary!='' ">
+                a.salary=#{salary},
+            </if>
+            <if test="card!=null and card!='' ">
+                a.card=#{card},
+            </if>
+            <if test="roleid!=null and roleid!='' ">
+                b.roleid=#{roleid},
+            </if>
+            a.updatetime=#{updatetime}
+        </set>
+        where a.isvalid=1 and a.id=#{id} and b.userid=#{id}
+    </update>
 
     <select id="findUserAndRoleByNP" parameterType="User" resultType="User">
         select u.*, r.id roleid,r.rolename from ffms.t_user u left JOIN ffms.t_user_role ur ON u.id=ur.userid INNER JOIN ffms.t_role r ON ur.roleid = r.id
@@ -40,11 +83,11 @@ where u.username=#{username} and u.password=#{password} and r.id=#{roleid};
         <include refid="whereUser"/>
     </select>
 
-    <insert id="insertUser" parameterType="User">
-        insert into ffms.t_user (username,password,createtime) value (#{username},#{password},#{createtime})
+    <insert id="addUser" parameterType="User">
+        insert into ffms.t_user values(null,#{username},#{password},#{truename},#{email},#{phone},#{address},#{sex},#{age},#{appellation},#{salary},#{card},1,#{createtime},null);
     </insert>
 
-    <insert id="insertUserRole">
+    <insert id="addUserRole" parameterType="user">
         insert into ffms.t_user_role (userid, roleid) VALUE (#{id},#{roleid})
     </insert>
 </mapper>
