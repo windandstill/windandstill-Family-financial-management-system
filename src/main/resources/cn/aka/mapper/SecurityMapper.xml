@@ -23,6 +23,19 @@
                  inner join t_datadic d on a.dataid = d.id
         <include refid="securityWhere"/>
     </select>
+
+    <select id="getAllUsers" parameterType="Map" resultType="user">
+        select id,username from t_user
+        <where>
+            --             判断用户是否有效的条件
+            isvalid=1
+            --             普通用户
+            <if test="userid!=null and roleid!=1">
+                and id=#{userid}
+            </if>
+        </where>
+    </select>
+
     <sql id="securityWhere">
         <where>
             <if test="username!=null and username!=''">

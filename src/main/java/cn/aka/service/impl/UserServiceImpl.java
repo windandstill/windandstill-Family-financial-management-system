@@ -58,8 +58,4 @@ public class UserServiceImpl implements UserService {
         return userMapper.findAllUserByPage(pageBean);
     }
 
-    @Override
-    public List<User> getAllUsers(Map<String,Object> map) {
-        return userMapper.getAllUsers(map);
-    }
 }

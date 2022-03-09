@@ -6,23 +6,9 @@
         select a.roleid,b.rolename from t_user_role a,t_role b where a.roleid=b.id and a.userid=#{id}
     </select>
 
-
-
     <select id="findUserAndRoleByNP" parameterType="User" resultType="User">
         select u.*, r.id roleid,r.rolename from ffms.t_user u left JOIN ffms.t_user_role ur ON u.id=ur.userid INNER JOIN ffms.t_role r ON ur.roleid = r.id
 where u.username=#{username} and u.password=#{password} and r.id=#{roleid};
-    </select>
-
-    <select id="getAllUsers" parameterType="Map" resultType="user">
-        select id,username from t_user
-        <where>
---             判断用户是否有效的条件
-            isvalid=1
---             普通用户
-            <if test="userid!=null and roleid!=1">
-                and id=#{userid}
-            </if>
-        </where>
     </select>
 
     <select id="findUserByUsername" resultType="User">
