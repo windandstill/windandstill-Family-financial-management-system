@@ -11,7 +11,6 @@ import cn.aka.util.ResponseUtil;
 import cn.aka.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,6 +52,7 @@ public class IPController {
         JSONObject result;
 
         JSONArray outerobj = new JSONArray();
+
         for (int i = 0; i < incomers.size(); i++) {
             curincomer = incomers.get(i).getIncomer();
             incomeArray = new JSONArray();
