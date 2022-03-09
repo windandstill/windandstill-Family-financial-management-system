@@ -3,6 +3,7 @@ package cn.aka.controller;
 import cn.aka.pojo.*;
 import cn.aka.service.RoleService;
 import cn.aka.service.UserService;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -169,6 +170,22 @@ public class UserController {
             result.setErrres(1);
             result.setErrmsg("数据修改成功！");
         }
+        return result;
+    }
+
+    /**
+     * 删除用户
+     */
+    @RequestMapping("/userdelete.do")
+    @ResponseBody
+    public Result delete(@RequestParam(value = "ids") String ids) throws Exception {
+        Result result = new Result();
+        String[] idsStr = ids.split(",");
+        for (int i = 0; i < idsStr.length; i++) {
+            userService.deleteUser(Integer.parseInt(idsStr[i]));
+        }
+        result.setErrres(1);
+        result.setErrmsg("数据删除成功！");
         return result;
     }
 

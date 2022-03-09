@@ -39,4 +39,9 @@ public interface UserMapper {
      * 修改用户
      */
     void updateUser(User user);
+
+    /**
+     * 删除用户
+     */
+    void deleteUser(Integer id);
 }

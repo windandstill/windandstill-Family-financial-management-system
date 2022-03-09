@@ -63,6 +63,9 @@
         </set>
         where a.isvalid=1 and a.id=#{id} and b.userid=#{id}
     </update>
+    <delete id="deleteUser" parameterType="int">
+        delete from ffms.t_user  where id=#{id};
+    </delete>
 
     <select id="findUserAndRoleByNP" parameterType="User" resultType="User">
         select u.*, r.id roleid,r.rolename from ffms.t_user u left JOIN ffms.t_user_role ur ON u.id=ur.userid INNER JOIN ffms.t_role r ON ur.roleid = r.id
