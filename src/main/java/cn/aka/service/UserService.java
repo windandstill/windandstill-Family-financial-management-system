@@ -8,6 +8,7 @@ import java.util.Map;
 public interface UserService {
     User findUserAndRoleByNP(User user);
 
+
     User findUserByUsername(User user);
 
     void insertUser(User user);

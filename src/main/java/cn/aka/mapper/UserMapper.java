@@ -28,10 +28,11 @@ public interface UserMapper {
     /**
      * 查询所有用户的数量
      */
-    int findTotalUser(Map<String, Object> map);
+    int findTotalUser();
 
     /**
      * 查询所有用户
+     * @param pageBean
      */
-    List<User> findAllUserByPage(Map<String, Object> map);
+    List<User> findAllUserByPage(PageBean pageBean);
 }

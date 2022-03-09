@@ -30,16 +30,12 @@ where u.username=#{username} and u.password=#{password} and r.id=#{roleid};
         select * from ffms.t_user where username=#{username};
     </select>
 
-
-    <select id="findAllUserByPage"  parameterType="Map" resultType="User">
+    <select id="findAllUserByPage" parameterType="pageBean" resultType="User">
         select u.*, r.id roleid,r.rolename from ffms.t_user u left JOIN ffms.t_user_role ur ON u.id=ur.userid INNER JOIN ffms.t_role r ON ur.roleid = r.id
-       <include refid="whereUser"/>
-        limit #{start},#{pageSize}
+limit #{page} ,#{pageSize};
     </select>
-
-    <select id="findTotalUser" parameterType="map" resultType="java.lang.Integer">
-        select count(*) from ffms.t_user u left JOIN ffms.t_user_role ur ON u.id=ur.userid INNER JOIN ffms.t_role r ON ur.roleid = r.id
-        <include refid="whereUser"/>
+    <select id="findTotalUser" resultType="java.lang.Integer">
+        select count(*) from ffms.t_user
     </select>
 
     <insert id="insertUser" parameterType="User">

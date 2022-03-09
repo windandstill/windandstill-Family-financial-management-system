@@ -35,9 +35,8 @@ public class UserController {
         return modelAndView;
     }
 
-    //public ModelAndView index(ModelAndView modelAndView) {
 
-    //}
+
 
     /**
      * 登录用户 并将当前用户放到session中
