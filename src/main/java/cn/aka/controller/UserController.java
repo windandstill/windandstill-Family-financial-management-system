@@ -1,25 +1,19 @@
 package cn.aka.controller;
 
 import cn.aka.pojo.Result;
-import cn.aka.pojo.Role;
 import cn.aka.pojo.User;
 import cn.aka.service.RoleService;
 import cn.aka.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.ws.rs.core.Request;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -28,39 +22,58 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 用把roles放在session里 传递
+     */
     @GetMapping(value = "/index")
-    public ModelAndView index(ModelAndView modelAndView) {
-        modelAndView.addObject("roles",roleService.getAllRole());
-        modelAndView.setViewName("login");
-        return modelAndView;
+    public String index(HttpServletRequest request) {
+        request.getSession().setAttribute("roles", roleService.getAllRole());
+        return "login";
     }
 
+    //public ModelAndView index(ModelAndView modelAndView) {
+    //    modelAndView.addObject("roles",roleService.getAllRole());
+    //    modelAndView.setViewName("login");
+    //    return modelAndView;
+    //}
+
+    /**
+     * 登录用户 并将当前用户放到session中
+     */
     @RequestMapping("/login")
     @ResponseBody
-    public Result login(User user, HttpServletRequest request){
+    public Result login(User user, HttpServletRequest request) {
         Result result = new Result();
         User currentUser = userService.findUserAndRoleByNP(user);
-        if (currentUser==null){
+        if (currentUser == null) {
             result.setErrres(101);
             result.setErrmsg("用户名或者密码错误");
             result.setInputfocus("inputUsername");
-        }else {
+        } else {
             result.setErrres(200);
-            request.getSession().setAttribute("currentUser",currentUser);
+            request.getSession().setAttribute("currentUser", currentUser);
+            request.getSession().setAttribute("usermessage", currentUser);
         }
         return result;
     }
+
+    /**
+     * 跳转到注册页面
+     */
     @RequestMapping("sign")
-    public String sgin(){
+    public String sgin() {
         return "sign";
     }
 
+    /**
+     * 注册用户
+     */
     @RequestMapping("gosign")
     @ResponseBody
-    public Result gosign(User user){
+    public Result gosign(User user) {
         User userByUsername = userService.findUserByUsername(user);
         Result result = new Result();
-        if (userByUsername == null){
+        if (userByUsername == null) {
             //创建时间
             Date date = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -68,20 +81,42 @@ public class UserController {
             //增加用户
             userService.insertUser(user);
             //获取用户id
-            User user1=userService.findUserByUsername(user);
+            User user1 = userService.findUserByUsername(user);
             //角色用户表中增加用户角色
             user1.setRoleid(user.getRoleid());
             userService.insertUserRole(user1);
             result.setErrres(1);
             result.setErrmsg("注册成功!");
-        }else {
+        } else {
             result.setErrmsg("注册失败,该用户名已存在!");
             result.setInputfocus("inputUsername");
         }
         return result;
     }
+
+    /**
+     * 查询所有用户并跳转到用户信息管理
+     */
+    @RequestMapping("userManage")
+    public ModelAndView userManage(User usermessage) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("userManage");
+        return modelAndView;
+    }
+
+    @RequestMapping("roleManage")
+    public String roleManage() {
+        return "roleManage";
+    }
+
+    @RequestMapping("datadicManage")
+    public String datadicManage() {
+        return "datadicManage";
+    }
+
     @RequestMapping("main")
-    public String main(){
+    public String main() {
         return "main";
     }
 
