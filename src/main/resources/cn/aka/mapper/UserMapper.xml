@@ -7,16 +7,13 @@
     </select>
 
 
-    <select id="getAllRole" resultType="role">
-        select * from ffms.t_role
-    </select>
 
     <select id="findUserAndRoleByNP" parameterType="User" resultType="User">
         select u.*, r.id roleid,r.rolename from ffms.t_user u left JOIN ffms.t_user_role ur ON u.id=ur.userid INNER JOIN ffms.t_role r ON ur.roleid = r.id
 where u.username=#{username} and u.password=#{password} and r.id=#{roleid};
     </select>
 
-    <select id="getAllUsers" parameterType="Map" resultMap="UserResult">
+    <select id="getAllUsers" parameterType="Map" resultType="user">
         select id,username from t_user
         <where>
 --             判断用户是否有效的条件
