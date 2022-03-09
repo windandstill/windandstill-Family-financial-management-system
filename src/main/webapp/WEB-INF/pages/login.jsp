@@ -37,7 +37,7 @@
 	</div>
 		
 	<!-- Modal -->
-        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+        <div aria-hidden="false" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -45,7 +45,7 @@
                         <h4 class="modal-title">提示您</h4>
                     </div>
                     <div class="modal-body">
-                        <h4 id="messageshow">${messageshow}</h4>
+                        <h4 id="messageshow"></h4>
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-success" type="button">确定</button>
@@ -58,21 +58,62 @@
 	<script type="text/javascript" src="${basePath}jquery-easyui-1.3.3/jquery.min.js"></script>
 	<script src="${basePath}bootstrap/js/bootstrap.min.js"></script>
 	<script src="${basePath}bootstrap/js/modernizr.min.js"></script>
-		<script>
-			$(function(){
-				$("#submitbtn").click(function(){
-					var form = document.forms[0];
-					form.action="${basePath}login.do";
-					form.method="post";
-					form.submit();
-		    	});
-				$(document).keydown(function(event){ 
-					if(event.keyCode == 13){
-						event.preventDefault();
-						$("#submitbtn").click();
-					}
-				});
+	<script>
+		$(function(){
+			$("#submitbtn").click(function(){
+				var inputUsername = $("#inputUsername").val();
+				var inputPassword = $("#inputPassword").val();
+				var inputRoleid = $("#roleid").val();
+				if(inputUsername==null||inputUsername==""){
+					$("#messageshow").html("请输入用户名！");
+					$("#myModal").modal("show");
+					$("#myModal").on("hidden.bs.modal", function (e) {
+						$("#inputUsername").focus();
+					});
+					return false;
+				}else if(inputPassword==null||inputPassword==""){
+					$("#messageshow").html("请输入密码！");
+					$("#myModal").modal("show");
+					$('#myModal').on("hidden.bs.modal", function (e) {
+						$("#inputPassword").focus();
+					});
+					return false;
+				}else if(inputRoleid==null||inputRoleid==""){
+					$("#messageshow").html("请选择用户类型！");
+					$("#myModal").modal("show");
+					$('#myModal').on("hidden.bs.modal", function (e) {
+						$("#roleid").focus();
+					});
+					return false;
+				}else{
+					$.ajax({
+						url:"${basePath}login.do",
+						type:"post",
+						dataType:"text",
+						data:{"username":inputUsername,"password":inputPassword,"roleid":inputRoleid},
+						success:function(data){
+							var result=eval('('+data+')');
+							if(result.errres==200){
+								window.location.href="${basePath}main.do";
+							}else{
+								$("#messageshow").html(result.errmsg);
+								$("#myModal").modal("show");
+								$("#myModal").on("hidden.bs.modal", function (e) {
+									$("#"+result.inputfocus).focus();
+								});
+							}
+						}
+					});
+				}
 			});
-	    </script>
+
+			$(document).keydown(function(event){
+				if(event.keyCode == 13){
+					event.preventDefault();
+					$("#submitbtn").click();
+				}
+			});
+		});
+	</script>
 </body>
 </html>

@@ -90,12 +90,14 @@
 								var result=eval('('+data+')');
 								if(result.errres){
 									$("#messageshow").html(result.errmsg);
+									// $("#messageshow").html("注册成功!");
 					    			$("#myModal").modal("show");
 					    			$("#myModal").on("hidden.bs.modal", function (e) {
 					    				window.location.href="${basePath}index.do";
 									});
 								}else{
 				            		$("#messageshow").html(result.errmsg);
+									// $("#messageshow").html("注册失败,该用户名已存在!");
 					    			$("#myModal").modal("show");
 					    			$("#myModal").on("hidden.bs.modal", function (e) {
 									  	$("#"+result.inputfocus).focus();
@@ -105,8 +107,8 @@
 		    			});
 				    }
 		    	});
-		    	
-				$(document).keydown(function(event){ 
+
+				$(document).keydown(function(event){
 					if(event.keyCode == 13){
 						event.preventDefault();
 						$("#submitbtn").click();

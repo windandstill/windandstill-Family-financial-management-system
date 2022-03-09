@@ -319,7 +319,7 @@
 	 					<select class="easyui-combobox" id="roleid" name="roleid" editable="false" readonly="readonly" style="width:175px;">
 	 						<option value="">请选择角色...</option>
 	 						<c:forEach items="${roles }" var="role">
-								<option value="${role.id }" <c:if test="${usermessage.roleid==role.id }"> selected="selected" </c:if>>${role.rolename }</option>
+								<option value="${role.id }" <c:if test="${usermessage.roleid==role.id }"> selected</c:if>>${role.rolename }</option>
 							</c:forEach>
 	 					</select>&nbsp;<font color="red">*</font>
 	 				</td>
