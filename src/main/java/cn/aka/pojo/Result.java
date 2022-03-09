@@ -6,6 +6,8 @@ public class Result {
 
     private String errmsg;
 
+    private String inputfocus;
+
     public Integer getErrres() {
         return errres;
     }
@@ -30,5 +32,5 @@ public class Result {
         this.inputfocus = inputfocus;
     }
 
-    private String inputfocus;
+
 }

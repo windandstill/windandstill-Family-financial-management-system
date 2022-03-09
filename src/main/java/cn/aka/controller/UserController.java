@@ -1,6 +1,8 @@
 package cn.aka.controller;
 
+import cn.aka.pojo.PageBean;
 import cn.aka.pojo.Result;
+import cn.aka.pojo.ResultBean;
 import cn.aka.pojo.User;
 import cn.aka.service.RoleService;
 import cn.aka.service.UserService;
@@ -8,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -26,15 +30,14 @@ public class UserController {
      * 用把roles放在session里 传递
      */
     @GetMapping(value = "/index")
-    public String index(HttpServletRequest request) {
-        request.getSession().setAttribute("roles", roleService.getAllRole());
-        return "login";
+    public ModelAndView index(ModelAndView modelAndView) {
+        modelAndView.addObject("roles",roleService.getAllRole());
+        modelAndView.setViewName("login");
+        return modelAndView;
     }
 
     //public ModelAndView index(ModelAndView modelAndView) {
-    //    modelAndView.addObject("roles",roleService.getAllRole());
-    //    modelAndView.setViewName("login");
-    //    return modelAndView;
+
     //}
 
     /**
@@ -51,6 +54,7 @@ public class UserController {
             result.setInputfocus("inputUsername");
         } else {
             result.setErrres(200);
+            request.getSession().setAttribute("roles",roleService.getAllRole());
             request.getSession().setAttribute("currentUser", currentUser);
             request.getSession().setAttribute("usermessage", currentUser);
         }
@@ -95,15 +99,32 @@ public class UserController {
     }
 
     /**
+     * 跳转到主页面
+     */
+    @RequestMapping("main")
+    public String main() {
+        return "main";
+    }
+
+    /**
      * 查询所有用户并跳转到用户信息管理
      */
     @RequestMapping("userManage")
-    public ModelAndView userManage(User usermessage) {
-        ModelAndView modelAndView = new ModelAndView();
-
-        modelAndView.setViewName("userManage");
-        return modelAndView;
+    public String userManage() {
+        return "userManage";
     }
+
+    @RequestMapping("userlist")
+    @ResponseBody
+    public ResultBean<User> userlist(@RequestParam(value = "page", required = false) String page,
+                                     @RequestParam(value = "rows", required = false) String rows){
+        PageBean pageBean = new PageBean((Integer.parseInt(page)-1)*Integer.parseInt(rows), Integer.parseInt(rows));
+        List<User> allUserByPage = userService.findAllUserByPage(pageBean);
+        ResultBean<User> userResultBean = new ResultBean<User>();
+        userResultBean.setRows(allUserByPage);
+        userResultBean.setTotal(userService.findTotalUser());
+        return userResultBean;
+}
 
     @RequestMapping("roleManage")
     public String roleManage() {
@@ -115,10 +136,7 @@ public class UserController {
         return "datadicManage";
     }
 
-    @RequestMapping("main")
-    public String main() {
-        return "main";
-    }
+
 
 
 }

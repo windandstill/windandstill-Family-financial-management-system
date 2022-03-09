@@ -1,10 +1,13 @@
 package cn.aka.service.impl;
 
 import cn.aka.mapper.UserMapper;
+import cn.aka.pojo.PageBean;
 import cn.aka.pojo.User;
 import cn.aka.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -36,5 +39,19 @@ public class UserServiceImpl implements UserService {
      */
     public void insertUserRole(User user){
         userMapper.insertUserRole(user);
+    }
+
+    /**
+     * 查询所有用户的数量
+     */
+    public int findTotalUser() {
+        return userMapper.findTotalUser();
+    }
+
+    /**
+     * 分页查找所有用户
+     */
+    public List<User> findAllUserByPage(PageBean pageBean) {
+        return userMapper.findAllUserByPage(pageBean);
     }
 }
