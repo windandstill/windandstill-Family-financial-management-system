@@ -11,12 +11,12 @@ public interface UserService {
 
     User findUserByUsername(User user);
 
-    void addUser(User user);
+    int addUser(User user);
 
     /**
      * 根据uid注册用户等级
      */
-    void addUserRole(User user);
+    int addUserRole(User user);
 
     /**
      * 查询所有用户的数量
@@ -31,10 +31,16 @@ public interface UserService {
     /**
      * 修改用户
      */
-    void updateUser(User user);
+    int updateUser(User user);
 
     /**
      * 删除用户
      */
-    void deleteUser(Integer id);
+    int deleteUser(Integer id);
+
+    /**
+     * 删除用户时删除用户角色联立表中数据
+     */
+    int deleteUserRole(Integer id);
+
 }

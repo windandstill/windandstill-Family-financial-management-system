@@ -5,6 +5,14 @@ package cn.aka.pojo;
  *
  */
 public class Role {
+	@Override
+	public String toString() {
+		return "Role{" +
+				"id=" + id +
+				", rolename='" + rolename + '\'' +
+				'}';
+	}
+
 	private Integer id; // 编号
 	private String rolename; // 角色名
 	public Integer getId() {

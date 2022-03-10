@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface DatadicMapper {
 
-  List<Datadic> findDatadicSecurity();
+  List<Datadic> findDatadicValueByName(String datadicName);
 }

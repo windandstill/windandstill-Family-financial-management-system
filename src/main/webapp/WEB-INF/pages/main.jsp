@@ -107,7 +107,7 @@
 			},
 			success : function(result) {
 				var result = eval('(' + result + ')');
-				if (result.success) {
+				if (result.errres) {
 					$.messager.alert("系统提示", "密码修改成功，下一次登录生效！");
 					closePasswordModifyDialog();
 				} else {

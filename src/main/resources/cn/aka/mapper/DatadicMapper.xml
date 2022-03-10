@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.aka.mapper.DatadicMapper">
-<select id="findDatadicSecurity" resultType="datadic">
-    select * from t_datadic where datadicname = "证券类型"
+<select id="findDatadicValueByName" parameterType="string" resultType="datadic">
+    select * from ffms.t_datadic where datadicname = #{datadicname}
 </select>
 </mapper>

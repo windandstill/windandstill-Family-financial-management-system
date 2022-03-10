@@ -63,8 +63,12 @@
         </set>
         where a.isvalid=1 and a.id=#{id} and b.userid=#{id}
     </update>
-    <delete id="deleteUser" parameterType="int">
+    <delete id="deleteUser" parameterType="int" >
         delete from ffms.t_user  where id=#{id};
+    </delete>
+
+    <delete id="deleteUserRole" parameterType="int">
+        delete from ffms.t_user_role where userid=#{id}
     </delete>
 
     <select id="findUserAndRoleByNP" parameterType="User" resultType="User">
