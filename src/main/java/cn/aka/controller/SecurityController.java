@@ -92,15 +92,4 @@ public class SecurityController {
         result.setErrmsg("删除成功!!!");
         return result;
     }
-
-
-    @RequestMapping("tradeManage")
-    public String a2() {
-        return "tradeManage";
-    }
-
-    @RequestMapping("sharesManage")
-    public String b() {
-        return "sharesManage";
-    }
 }
