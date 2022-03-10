@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface InPayService {
+    //    List<Income> getIncomeLine(Income income);
     List<Income> getIncomeLine(Map<String,Object> map);
     List<Income> getIncomer();
 

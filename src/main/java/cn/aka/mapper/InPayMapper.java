@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface InPayMapper {
+//    List<Income> getIncomeLine(Income income);
     List<Income> getIncomeLine(Map<String,Object> map);
     List<Income> getIncomer();
 
@@ -18,3 +19,4 @@ public interface InPayMapper {
     List<Datadic> getDatadicPay();
     List<Datadic> getDatadicIncome();
 }
+

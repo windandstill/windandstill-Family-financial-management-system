@@ -27,7 +27,8 @@
 		// 	$.messager.alert("系统提示","起始时间不能大于截止时间！");
 		// 	return;
 		// }
-        $.post("${basePath}produceIncomeTime.do", {incomer : s_incomer,starttime:s_starttime,endtime:s_endtime,roleid:"${currentUser.roleid}",userid:"${currentUser.id}"}, function(result) {
+        $.post("${basePath}produceIncomeTime.do", {incomer : s_incomer,starttime:s_starttime,endtime:s_endtime,roleid:"${currentUser.roleid}",userid:"${currentUser.id}"},
+				function(result) {
         $('#containerLine').highcharts({
             chart: {
                 type: 'spline'

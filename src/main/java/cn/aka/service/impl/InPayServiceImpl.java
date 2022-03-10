@@ -18,7 +18,7 @@ public class InPayServiceImpl implements InPayService {
     private InPayMapper inPayMapper;
 
 
-    public List<Income> getIncomeLine(Map<String,Object> map) {
+    public List<Income> getIncomeLine(Map<String, Object> map) {
         return inPayMapper.getIncomeLine(map);
     }
 

@@ -19,8 +19,27 @@ public class Income {
 	
 	private String starttime;//搜索起始时间
 	private String endtime;//搜索截止时间
-	
-	
+
+	private Integer start;
+	// 每页显示数据条数
+	private Integer size;
+
+	public Integer getStart() {
+		return start;
+	}
+
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+
+	public Integer getSize() {
+		return size;
+	}
+
+	public void setSize(Integer size) {
+		this.size = size;
+	}
+
 	public String getStarttime() {
 		return starttime;
 	}

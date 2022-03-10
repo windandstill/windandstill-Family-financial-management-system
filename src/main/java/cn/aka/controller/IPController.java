@@ -1,10 +1,7 @@
 package cn.aka.controller;
 
 
-import cn.aka.pojo.Datadic;
-import cn.aka.pojo.Income;
-import cn.aka.pojo.Pay;
-import cn.aka.pojo.User;
+import cn.aka.pojo.*;
 import cn.aka.service.InPayService;
 import cn.aka.util.Constants;
 import cn.aka.util.ResponseUtil;
@@ -37,8 +34,23 @@ public class IPController {
 
     @RequestMapping("/produceIncomeTime.do")
     public String produceIncomeTime(Income s_income, HttpServletResponse response) {
+//        ModelAndView mv = new ModelAndView();
+//        List<Income> incomeList = inPayService.getIncomeLine(s_income);
+//       List<Income> incomers = inPayService.getIncomer();
+//       mv.addObject("incomer",s_income.getIncomer());
+//       mv.addObject("starttime", s_income.getStarttime());
+//        mv.addObject("endtime",s_income.getEndtime());
+//        mv.addObject("roleid",s_income.getRoleid());
+//        mv.addObject("userid",s_income.getUserid());
+//        Result result = new Result();
+//        String curincomer;
+//        curincomer = incomers.getIncomer();
+//        result.getIncomer();
+//        result.getIncometime();
+//        result.getMoney();
+//        return mv;
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("incomer", StringUtil.formatLike(s_income.getIncomer()));
+        map.put("incomer", s_income.getIncomer());
         map.put("starttime", s_income.getStarttime());
         map.put("endtime", s_income.getEndtime());
         map.put("roleid", s_income.getRoleid());
