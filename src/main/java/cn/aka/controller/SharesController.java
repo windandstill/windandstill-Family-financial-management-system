@@ -76,7 +76,6 @@ public class SharesController {
     @RequestMapping("sharesdelete")
     @ResponseBody
     public Result delete(@RequestParam(value = "ids")String ids) {
-        System.out.println("12314");
         Result result = new Result();
         int total = 0;
         String[] idsStr = ids.split(",");
