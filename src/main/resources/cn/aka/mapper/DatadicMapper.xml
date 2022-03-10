@@ -4,4 +4,7 @@
 <select id="findDatadicValueByName" parameterType="string" resultType="datadic">
     select * from ffms.t_datadic where datadicname = #{datadicname}
 </select>
+    <select id="findAllDataticName" resultType="datadic">
+        select distinct datadicname from ffms.t_datadic
+    </select>
 </mapper>

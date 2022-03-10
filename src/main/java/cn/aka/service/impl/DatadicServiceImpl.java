@@ -13,8 +13,20 @@ public class DatadicServiceImpl implements DatadicService {
     @Autowired
     private DatadicMapper datadicMapper;
 
+    /**
+     * 根据字典名称查询字典数值
+     */
     @Override
     public List<Datadic> findDatadicValueByName(String datadicName) {
         return datadicMapper.findDatadicValueByName(datadicName);
+    }
+
+
+    /**
+     * 查询所有字典名称
+     */
+    @Override
+    public List<Datadic> findAllDataticName(){
+        return datadicMapper.findAllDataticName();
     }
 }

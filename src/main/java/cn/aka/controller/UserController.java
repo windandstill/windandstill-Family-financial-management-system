@@ -232,10 +232,6 @@ public class UserController {
 
 
 
-    @RequestMapping("datadicManage")
-    public String datadicManage() {
-        return "datadicManage";
-    }
 
 
 
