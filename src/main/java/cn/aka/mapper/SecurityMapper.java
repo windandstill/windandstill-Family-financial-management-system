@@ -42,4 +42,9 @@ public interface SecurityMapper {
      */
     int deleteSecurity(Integer id);
 
+    /**
+     * 查询所有用户
+     */
+    List<Security> getAllSecurity();
+
 }

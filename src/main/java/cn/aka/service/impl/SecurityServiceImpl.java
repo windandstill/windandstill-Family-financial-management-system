@@ -52,4 +52,9 @@ public class SecurityServiceImpl implements SecurityService {
     public int deleteSecurity(Integer id) {
         return securityMapper.deleteSecurity(id);
     }
+
+    @Override
+    public List<Security> getAllSecurity() {
+        return securityMapper.getAllSecurity();
+    }
 }

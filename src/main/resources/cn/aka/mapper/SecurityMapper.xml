@@ -48,8 +48,12 @@
     </update>
 
     <delete id="deleteSecurity" parameterType="int">
-        delete from t_security where id = #{id}
+        delete from ffms.t_security where id = #{id}
     </delete>
+    
+    <select id="getAllSecurity" resultType="security">
+        select id,securityname from ffms.t_security
+    </select>
 
 <sql id="setSecurity">
     <set>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.aka.mapper.SharesMapper">
+    <select id="findShares" resultType="shares" parameterType="sharesVo">
+        SELECT *
+        FROM ffms.t_shares a
+        INNER JOIN t_security b on a.securityid = b.id
+        INNER JOIN t_user c on a.userid = c.id
+        INNER JOIN t_user_role d on a.userid = d.userid
+        <include refid="sharesWhere"/>
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+    <select id="findCount" resultType="int" parameterType="sharesVo">
+        SELECT count(*)
+        FROM ffms.t_shares a
+        INNER JOIN t_security b on a.securityid = b.id
+        INNER JOIN t_user c on a.userid = c.id
+        INNER JOIN t_user_role d on a.userid = d.userid
+        <include refid="sharesWhere"/>
+    </select>
+    <insert id="addShares" parameterType="shares">
+        insert into t_shares
+        values (null, #{userid}, #{securityid}, #{sharesname}, #{holder}, #{createtime}, null)
+    </insert>
+    <update id="updateShares" parameterType="shares">
+        update t_shares
+        <include refid="setShares"/>
+    </update>
+    <delete id="deleteShares" parameterType="int">
+        delete from ffms.t_shares where id = #{id}
+    </delete>
+    <sql id="setShares">
+        <set>
+            <if test="userid!=null and userid!='' ">
+                userid=#{userid},
+            </if>
+            <if test="securityid!=null and securityid!='' ">
+                securityid=#{securityid},
+            </if>
+            <if test="sharesname!=null and sharesname!='' ">
+                sharesname=#{sharesname},
+            </if>
+            <if test="holder!=null and holder!='' ">
+                holder=#{holder},
+            </if>
+            updatetime=#{updatetime}
+        </set>
+        where id=#{id}
+    </sql>
+    <sql id="sharesWhere">
+        <where>
+            <if test="securityname!=null and securityname!='' ">
+                and b.securityname like '%${securityname}%'
+            </if>
+            <if test="sharesname!=null and sharesname!='' ">
+                and a.sharesname like '%${sharesname}%'
+            </if>
+            <if test="holder!=null and holder!='' ">
+                and a.holder like '%${holder}%'
+            </if>
+            <if test="userid!=null and roleid!=1">
+                and a.userid=#{userid}
+            </if>
+        </where>
+    </sql>
+</mapper>

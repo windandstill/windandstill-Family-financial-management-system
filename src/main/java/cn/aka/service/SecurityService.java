@@ -10,13 +10,19 @@ import java.util.Map;
 public interface SecurityService {
 
     List<Security> findSecurityById(SecurityVo vo);
+
     int findCount(SecurityVo vo);
+
     /**
      * 查询所有用户
      */
-    List<User> getAllUsers(Map<String,Object> map);
+    List<User> getAllUsers(Map<String, Object> map);
+
     int addSecurity(Security security);
+
     int updateSecurity(Security security);
+
     int deleteSecurity(Integer id);
 
+    List<Security> getAllSecurity();
 }
