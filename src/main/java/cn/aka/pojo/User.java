@@ -33,7 +33,31 @@ public class User {
 	private String roleIDs=""; // 对应的角色列表id
 	private String roleNames=""; // 对应的角色列表名称
 
-
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", truename='" + truename + '\'' +
+				", email='" + email + '\'' +
+				", phone='" + phone + '\'' +
+				", address='" + address + '\'' +
+				", sex=" + sex +
+				", age=" + age +
+				", appellation='" + appellation + '\'' +
+				", salary=" + salary +
+				", card='" + card + '\'' +
+				", isvalid=" + isvalid +
+				", createtime='" + createtime + '\'' +
+				", updatetime='" + updatetime + '\'' +
+				", roleid=" + roleid +
+				", rolename='" + rolename + '\'' +
+				", roleIDsList=" + roleIDsList +
+				", roleIDs='" + roleIDs + '\'' +
+				", roleNames='" + roleNames + '\'' +
+				'}';
+	}
 
 	public List<Map<Object, Object>> getRoleIDsList() {
 		return roleIDsList;
@@ -53,7 +77,7 @@ public class User {
 			}
 		}
 	}
-	
+
 	public Integer getRoleid() {
 		return roleid;
 	}
