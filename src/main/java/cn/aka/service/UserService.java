@@ -1,6 +1,5 @@
 package cn.aka.service;
 
-import cn.aka.pojo.PageBean;
 import cn.aka.pojo.User;
 
 import java.util.List;
@@ -12,20 +11,36 @@ public interface UserService {
 
     User findUserByUsername(User user);
 
-    void insertUser(User user);
+    int addUser(User user);
 
     /**
      * 根据uid注册用户等级
      */
-    void insertUserRole(User user);
+    int addUserRole(User user);
 
     /**
      * 查询所有用户的数量
      */
-    int findTotalUser();
+    int findTotalUser(Map<String, Object> map);
 
     /**
      * 分页查询所有用户
      */
-    List<User> findAllUserByPage(PageBean pageBean);
+    List<User> findAllUserByPage(Map<String, Object> map);
+
+    /**
+     * 修改用户
+     */
+    int updateUser(User user);
+
+    /**
+     * 删除用户
+     */
+    int deleteUser(Integer id);
+
+    /**
+     * 删除用户时删除用户角色联立表中数据
+     */
+    int deleteUserRole(Integer id);
+
 }

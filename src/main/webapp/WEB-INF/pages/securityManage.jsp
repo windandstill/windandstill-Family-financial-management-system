@@ -55,7 +55,7 @@
             $.messager.confirm("系统提示", "您确认要删除这<font color=red>"
                 + selectedRows.length + "</font>条数据吗？", function (r) {
                 if (r) {
-                    $.post("${basePath}/securitydelete.do", {
+                    $.post("${basePath}securitydelete.do", {
                         ids: ids
                     }, function (result) {
                         if (result.errres) {

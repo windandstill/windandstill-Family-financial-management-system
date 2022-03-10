@@ -1,13 +1,13 @@
 package cn.aka.service.impl;
 
 import cn.aka.mapper.UserMapper;
-import cn.aka.pojo.PageBean;
 import cn.aka.pojo.User;
 import cn.aka.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +19,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Override
     public User findUserAndRoleByNP(User user) {
         return userMapper.findUserAndRoleByNP(user);
     }
@@ -26,6 +27,7 @@ public class UserServiceImpl implements UserService {
     /**
      * 通过姓名查找用户
      */
+    @Override
     public User findUserByUsername(User user) {
         return userMapper.findUserByUsername(user);
     }
@@ -33,29 +35,55 @@ public class UserServiceImpl implements UserService {
     /**
      * 通过用户名和密码来注册用户
      */
-    public void insertUser(User user) {
-        userMapper.insertUser(user);
+    @Override
+    public int addUser(User user) {
+        return userMapper.addUser(user);
     }
 
     /**
      * 根据uid注册用户等级
      */
-    public void insertUserRole(User user){
-        userMapper.insertUserRole(user);
+    @Override
+    public int addUserRole(User user){
+        return userMapper.addUserRole(user);
     }
 
     /**
      * 查询所有用户的数量
      */
-    public int findTotalUser() {
-        return userMapper.findTotalUser();
+    @Override
+    public int findTotalUser(Map<String, Object> map) {
+        return userMapper.findTotalUser(map);
     }
 
     /**
      * 分页查找所有用户
      */
-    public List<User> findAllUserByPage(PageBean pageBean) {
-        return userMapper.findAllUserByPage(pageBean);
+    @Override
+    public List<User> findAllUserByPage(Map<String, Object> map) {
+        return userMapper.findAllUserByPage(map);
     }
+
+    /**
+     * 修改用户
+     */
+    @Override
+    public int updateUser(User user) {
+        return userMapper.updateUser(user);
+    }
+
+    /**
+     * 删除用户
+     */
+    @Override
+    public int deleteUser(Integer id) {
+        return userMapper.deleteUser(id);
+    }
+
+    @Override
+    public int deleteUserRole(Integer id) {
+        return userMapper.deleteUserRole(id);
+    }
+
 
 }

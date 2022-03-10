@@ -10,8 +10,16 @@ public class PageBean {
 	private int page; // 第几页
 	private int pageSize; // 每页记录数
 	private int start;  // 起始页
-	
-	
+
+	@Override
+	public String toString() {
+		return "PageBean{" +
+				"page=" + page +
+				", pageSize=" + pageSize +
+				", start=" + start +
+				'}';
+	}
+
 	public PageBean(int page, int pageSize) {
 		super();
 		this.page = page;

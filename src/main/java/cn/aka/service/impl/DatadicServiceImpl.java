@@ -14,7 +14,7 @@ public class DatadicServiceImpl implements DatadicService {
     private DatadicMapper datadicMapper;
 
     @Override
-    public List<Datadic> findDatadicSecurity() {
-        return datadicMapper.findDatadicSecurity();
+    public List<Datadic> findDatadicValueByName(String datadicName) {
+        return datadicMapper.findDatadicValueByName(datadicName);
     }
 }

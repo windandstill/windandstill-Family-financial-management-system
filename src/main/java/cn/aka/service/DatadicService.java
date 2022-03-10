@@ -5,6 +5,6 @@ import cn.aka.pojo.Datadic;
 import java.util.List;
 
 public interface DatadicService {
-    List<Datadic> findDatadicSecurity();
+    List<Datadic> findDatadicValueByName(String datadicName);
 
 }

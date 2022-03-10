@@ -44,7 +44,7 @@
 						$.messager.alert("系统提示",result.errmsg);
 						$("#dg").datagrid("reload");
 					}else{
-						$.messager.alert("系统提示","数据删除失败！");
+						$.messager.alert("系统提示",result.errmsg);
 					}
 				},"json");
 			}
