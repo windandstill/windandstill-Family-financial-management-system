@@ -5,4 +5,14 @@
     <select id="getAllRole" resultType="role">
         select * from ffms.t_role
     </select>
+
+    <select id="findAllRoleByPage" parameterType="map" resultType="role">
+        select * from ffms.t_role
+        <where>
+        <if test="rolename!=null and rolename!='' ">
+            and rolename like "%"#{rolename}"%"
+        </if>
+        </where>
+        limit #{start} ,#{pageSize};
+    </select>
 </mapper>

@@ -37,7 +37,7 @@ public class UserController {
     }
 
     /**
-     * 登录用户 并将当前用户放到session中
+     * 登录用户
      */
     @RequestMapping("/login")
     @ResponseBody
@@ -109,7 +109,7 @@ public class UserController {
     }
 
     /**
-     * 查询所有用户并跳转到用户信息管理
+     * 查询所有角色并跳转到用户信息管理
      */
     @RequestMapping("userManage")
     public ModelAndView userManage(ModelAndView modelAndView) {
@@ -229,10 +229,7 @@ public class UserController {
 
 
 
-    @RequestMapping("roleManage")
-    public String roleManage() {
-        return "roleManage";
-    }
+
 
     @RequestMapping("datadicManage")
     public String datadicManage() {
