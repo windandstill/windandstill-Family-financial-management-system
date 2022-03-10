@@ -36,7 +36,7 @@ public class SecurityController {
     @RequestMapping("/securityManage")
     public ModelAndView securityManage(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
-        List<Datadic> datadics = datadicService.findDatadicSecurity();
+        List<Datadic> datadics = datadicService.findDatadicValueByName("证券类型");
         mv.addObject("securitys", datadics);
 
         User user = (User) request.getSession().getAttribute("currentUser");
