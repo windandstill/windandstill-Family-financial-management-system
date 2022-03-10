@@ -14,10 +14,32 @@ import java.util.Map;
 
 public interface SecurityMapper {
 
-List<Security> findSecurityById(SecurityVo vo);
-int findCount(SecurityVo vo);
+    List<Security> findSecurityById(SecurityVo vo);
+
+    /**
+     * 查询总记录数
+     */
+    int findCount(SecurityVo vo);
+
     /**
      * 查询所有用户
      */
-    List<User> getAllUsers(Map<String,Object> map);
+    List<User> getAllUsers(Map<String, Object> map);
+
+    /**
+     * 添加用户
+     */
+    int addSecurity(Security security);
+
+    /**
+     * 修改用户
+     */
+    int updateSecurity(Security security);
+
+
+    /**
+     * 删除用户
+     */
+    int deleteSecurity(Integer id);
+
 }

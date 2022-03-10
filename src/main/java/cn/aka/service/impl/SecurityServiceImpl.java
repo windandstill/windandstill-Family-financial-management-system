@@ -8,6 +8,8 @@ import cn.aka.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,5 +30,26 @@ public class SecurityServiceImpl implements SecurityService {
     @Override
     public List<User> getAllUsers(Map<String, Object> map) {
         return securityMapper.getAllUsers(map);
+    }
+
+    @Override
+    public int addSecurity(Security security) {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        security.setCreatetime(sdf.format(date));
+        return securityMapper.addSecurity(security);
+    }
+
+    @Override
+    public int updateSecurity(Security security) {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        security.setUpdatetime(sdf.format(date));
+        return securityMapper.updateSecurity(security);
+    }
+
+    @Override
+    public int deleteSecurity(Integer id) {
+        return securityMapper.deleteSecurity(id);
     }
 }

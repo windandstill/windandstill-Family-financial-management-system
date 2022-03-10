@@ -30,8 +30,6 @@ public class SecurityController {
     @Autowired
     private SecurityService securityService;
 
-    @Autowired
-    private UserService userService;
 
     @RequestMapping("/securityManage")
     public ModelAndView securityManage(HttpServletRequest request) {
@@ -44,27 +42,65 @@ public class SecurityController {
         userMap.put("userid", user.getId());
         userMap.put("roleid", user.getRoleid());
         List<User> allUsers = securityService.getAllUsers(userMap);
-        mv.addObject("allUsers",allUsers);
+        mv.addObject("allUsers", allUsers);
         return mv;
     }
-    @RequestMapping ("securitylist")
+
+    @RequestMapping("securitylist")
     @ResponseBody
     public ResultBean<Security> list(@RequestParam(value = "page", required = false) String page,
-                       @RequestParam(value = "rows", required = false) String rows, SecurityVo securityVo) {
+                                     @RequestParam(value = "rows", required = false) String rows, SecurityVo securityVo) {
         ResultBean<Security> resultBean = new ResultBean<>();
-        PageBean pageBean = new PageBean((Integer.parseInt(page)-1)*(Integer.parseInt(rows)), Integer.parseInt(rows));
+        PageBean pageBean = new PageBean((Integer.parseInt(page) - 1) * (Integer.parseInt(rows)), Integer.parseInt(rows));
         int total = securityService.findCount(securityVo);
         resultBean.setTotal(total);
         List<Security> securities = securityService.findSecurityById(securityVo);
         resultBean.setRows(securities);
         return resultBean;
-}
-@RequestMapping("tradeManage")
-    public String a(){
+    }
+
+    @RequestMapping("securitysave")
+    @ResponseBody
+    public Result save(Security security) {
+        Result result = new Result();
+        int total = 0;
+        if (security.getId() == null) {
+            total = securityService.addSecurity(security);
+        }else {
+            total = securityService.updateSecurity(security);
+        }
+        if (total > 0) {
+            result.setErrres(200);
+            result.setErrmsg("用户保存成功!!!");
+        } else {
+            result.setErrres(101);
+            result.setErrmsg("用户添加失败");
+        }
+        return result;
+    }
+
+    @RequestMapping("securitydelete")
+    @ResponseBody
+    public Result delete(@RequestParam(value = "ids")String ids) {
+        Result result = new Result();
+        int total = 0;
+        String[] idsStr = ids.split(",");
+        for (int i = 0; i < idsStr.length; i++) {
+            securityService.deleteSecurity(Integer.parseInt(idsStr[i]));
+        }
+        result.setErrres(200);
+        result.setErrmsg("删除成功!!!");
+        return result;
+    }
+
+
+    @RequestMapping("tradeManage")
+    public String a2() {
         return "tradeManage";
-}
+    }
+
     @RequestMapping("sharesManage")
-    public String b(){
+    public String b() {
         return "sharesManage";
     }
 }

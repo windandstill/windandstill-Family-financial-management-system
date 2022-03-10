@@ -15,4 +15,8 @@ public interface SecurityService {
      * 查询所有用户
      */
     List<User> getAllUsers(Map<String,Object> map);
+    int addSecurity(Security security);
+    int updateSecurity(Security security);
+    int deleteSecurity(Integer id);
+
 }
