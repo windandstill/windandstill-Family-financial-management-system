@@ -32,6 +32,14 @@ private RoleMapper roleMapper;
     }
 
     /**
+     * 总计所有角色数量
+     */
+    @Override
+    public int findAllRoleByTotal(Map map) {
+        return roleMapper.findAllRoleByTotal(map);
+    }
+
+    /**
      * 添加角色
      */
     @Override

@@ -19,8 +19,12 @@ public interface RoleMapper {
     List<Role> findAllRoleByPage(Map<String, Object> map);
 
     /**
+     * 总计所有角色数量
+     */
+    int findAllRoleByTotal(Map map);
+
+    /**
      * 添加角色
-     * @param role
      */
     int addRole(Role role);
 
@@ -35,7 +39,7 @@ public interface RoleMapper {
     int deleteRole(Integer id);
 
     /**
-     * 根据id查找user与role联立表中元素
+     * 根据id查找user与role联立表中元素用于判断表中是否还有正在使用的角色
      */
     int findUserAndRoleByRoleId(Integer id);
 

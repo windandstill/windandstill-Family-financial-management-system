@@ -5,7 +5,13 @@
         insert into ffms.t_role(rolename) value (#{rolename})
     </insert>
     <update id="update" parameterType="role">
-        update ffms.t_role set rolename=#{rolename} where id = #{id}
+        update ffms.t_role
+        <set>
+            <if test="rolename!=null and rolename!=''">
+                rolename=#{rolename}
+            </if>
+        </set>
+        where id=#{id};
     </update>
     <delete id="deleteRole" parameterType="int">
         delete from ffms.t_role where id =#{id}
@@ -25,6 +31,16 @@
         </where>
         limit #{start} ,#{pageSize};
     </select>
+
+    <select id="findAllRoleByTotal" parameterType="map" resultType="java.lang.Integer">
+        select count(*) from ffms.t_role
+        <where>
+            <if test="rolename!=null and rolename!='' ">
+                and rolename like "%"#{rolename}"%"
+            </if>
+        </where>
+    </select>
+
     <select id="findUserAndRoleByRoleId" resultType="java.lang.Integer">
         select count(*) from ffms.t_user_role where roleid=#{id}
     </select>
