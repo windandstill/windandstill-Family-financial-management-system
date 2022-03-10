@@ -1,9 +1,6 @@
 package cn.aka.controller;
 
-import cn.aka.pojo.PageBean;
-import cn.aka.pojo.ResultBean;
-import cn.aka.pojo.Role;
-import cn.aka.pojo.User;
+import cn.aka.pojo.*;
 import cn.aka.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +23,7 @@ public class RoleController {
         return "roleManage";
     }
 
-    @RequestMapping("/rolelist")
+    @RequestMapping("rolelist")
     @ResponseBody
     public ResultBean<Role> rolelist(@RequestParam(value = "page", required = false) String page,
                                       @RequestParam(value = "rows", required = false) String rows, Role role){
@@ -43,5 +40,38 @@ public class RoleController {
         return roleResultBean;
     }
 
+    @RequestMapping("rolesave")
+    @ResponseBody
+    public Result rolesave(Role role){
+        Result result = new Result();
+        int resultTotal = 0;
+        List<Role> allRole = roleService.getAllRole();
+        for (Role role1 : allRole){
+            if (role1.getRolename().equals(role.getRolename())){
+                result.setErrmsg("该角色已存在");
+                return result;
+            }
+        }
+        if (role.getId()!=null){
+            resultTotal = roleService.updateRole(role);
+            if (resultTotal<1){
+                result.setErrmsg("修改失败");
+            }else {
+                result.setErrres(1);
+                result.setErrmsg("修改成功");
+            }
+
+        }else {
+            resultTotal = roleService.addRole(role);
+            if (resultTotal<1){
+                result.setErrmsg("添加失败");
+            }else {
+                result.setErrres(1);
+                result.setErrmsg("添加成功");
+            }
+        }
+
+        return result;
+    }
 
 }
