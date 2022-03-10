@@ -37,4 +37,10 @@ public interface UserService {
      * 删除用户
      */
     int deleteUser(Integer id);
+
+    /**
+     * 删除用户时删除用户角色联立表中数据
+     */
+    int deleteUserRole(Integer id);
+
 }

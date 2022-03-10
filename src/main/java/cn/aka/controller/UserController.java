@@ -201,9 +201,10 @@ public class UserController {
         int resultTotal=0;
         String[] idsStr = ids.split(",");
         for (int i = 0; i < idsStr.length; i++) {
+            resultTotal+= userService.deleteUserRole(Integer.parseInt(idsStr[i]));
             resultTotal+= userService.deleteUser(Integer.parseInt(idsStr[i]));
         }
-        if (resultTotal==idsStr.length){
+        if (resultTotal==(idsStr.length*2)){
             result.setErrres(1);
             result.setErrmsg("数据删除成功！");
         }else {

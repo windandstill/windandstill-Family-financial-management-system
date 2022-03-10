@@ -7,6 +7,9 @@
     <update id="update" parameterType="role">
         update ffms.t_role set rolename=#{rolename} where id = #{id}
     </update>
+    <delete id="deleteRole" parameterType="int">
+        delete from ffms.t_role where id =#{id}
+    </delete>
 
 
     <select id="getAllRole" resultType="role">
@@ -21,5 +24,8 @@
         </if>
         </where>
         limit #{start} ,#{pageSize};
+    </select>
+    <select id="findUserAndRoleByRoleId" resultType="java.lang.Integer">
+        select count(*) from ffms.t_user_role where roleid=#{id}
     </select>
 </mapper>

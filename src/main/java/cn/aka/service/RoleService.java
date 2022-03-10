@@ -25,4 +25,14 @@ public interface RoleService {
      * 修改角色
      */
     int updateRole(Role role);
+
+    /**
+     * 删除角色
+     */
+    int deleteRole(Integer id);
+
+    /**
+     * 根据id查找user与role联立表中元素
+     */
+    int findUserAndRoleByRoleId(Integer id);
 }

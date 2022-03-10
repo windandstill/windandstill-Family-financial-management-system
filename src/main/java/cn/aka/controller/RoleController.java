@@ -23,6 +23,9 @@ public class RoleController {
         return "roleManage";
     }
 
+    /**
+     * 分页显示角色列表
+     */
     @RequestMapping("rolelist")
     @ResponseBody
     public ResultBean<Role> rolelist(@RequestParam(value = "page", required = false) String page,
@@ -40,6 +43,9 @@ public class RoleController {
         return roleResultBean;
     }
 
+    /**
+     * 角色的修改与添加
+     */
     @RequestMapping("rolesave")
     @ResponseBody
     public Result rolesave(Role role){
@@ -70,8 +76,33 @@ public class RoleController {
                 result.setErrmsg("添加成功");
             }
         }
-
         return result;
     }
 
+    /**
+     * 批量删除用户
+     */
+    @RequestMapping("roledelete")
+    @ResponseBody
+    public Result roledelete(@RequestParam(value = "ids") String ids){
+        Result result = new Result();
+        int resultTotal=0;
+        String[] idsStr = ids.split(",");
+        for (int i = 0; i < idsStr.length; i++) {
+            if (roleService.findUserAndRoleByRoleId(Integer.parseInt(idsStr[i]))!=0){
+                result.setErrmsg("还有用户使用此角色,无法删除");
+                return result;
+            }
+        }
+        for (int i = 0; i < idsStr.length; i++) {
+            resultTotal+= roleService.deleteRole(Integer.parseInt(idsStr[i]));
+        }
+        if (resultTotal==idsStr.length){
+            result.setErrres(1);
+            result.setErrmsg("数据删除成功！");
+        }else {
+            result.setErrmsg("删除失败");
+        }
+        return result;
+    }
 }

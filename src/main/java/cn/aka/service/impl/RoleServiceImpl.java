@@ -46,4 +46,17 @@ private RoleMapper roleMapper;
     public int updateRole(Role role) {
         return roleMapper.update(role);
     }
+
+    /**
+     * 删除角色
+     */
+    @Override
+    public int deleteRole(Integer id) {
+        return roleMapper.deleteRole(id);
+    }
+
+    @Override
+    public int findUserAndRoleByRoleId(Integer id) {
+        return roleMapper.findUserAndRoleByRoleId(id);
+    }
 }
