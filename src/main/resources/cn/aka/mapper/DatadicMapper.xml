@@ -17,6 +17,9 @@
         </set>
         where id=#{id};
     </update>
+    <delete id="deleteDatadic" parameterType="int">
+        delete from ffms.t_datadic where id=#{id}
+    </delete>
 
     <select id="findDatadicValueByName" parameterType="string" resultType="datadic">
     select * from ffms.t_datadic where datadicname = #{datadicname}

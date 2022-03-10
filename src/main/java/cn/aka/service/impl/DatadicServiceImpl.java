@@ -72,4 +72,12 @@ public class DatadicServiceImpl implements DatadicService {
         return datadicMapper.updateDatadic(datadic);
     }
 
+    /**
+     * 删除数据字典
+     */
+    @Override
+    public int deleteDatadic(Integer id) {
+        return datadicMapper.deleteDatadic(id);
+    }
+
 }

@@ -40,4 +40,9 @@ public interface DatadicMapper {
    * 修改数据字典
    */
   int updateDatadic(Datadic datadic);
+
+  /**
+   * 删除数据字典
+   */
+  int deleteDatadic(Integer id);
 }

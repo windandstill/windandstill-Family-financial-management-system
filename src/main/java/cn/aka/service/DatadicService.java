@@ -42,4 +42,9 @@ public interface DatadicService {
      */
     int updateDatadic(Datadic datadic);
 
+    /**
+     * 删除数据字典
+     */
+    int deleteDatadic(Integer id);
+
 }

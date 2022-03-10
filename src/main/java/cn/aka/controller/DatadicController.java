@@ -86,4 +86,31 @@ public class DatadicController {
         }
         return result;
     }
+
+    /**
+     * 批量删除字典数据
+     */
+    @RequestMapping("datadicdelete")
+    @ResponseBody
+    public Result datadicdelete(@RequestParam(value = "ids") String ids){
+        Result result = new Result();
+        int resultTotal=0;
+        String[] idsStr = ids.split(",");
+        //for (int i = 0; i < idsStr.length; i++) {
+        //    if (datadicService.findUserAndRoleByRoleId(Integer.parseInt(idsStr[i]))!=0){
+        //        result.setErrmsg("还有用户使用此字典数据,无法删除");
+        //        return result;
+        //    }
+        //}
+        for (int i = 0; i < idsStr.length; i++) {
+            resultTotal+= datadicService.deleteDatadic(Integer.parseInt(idsStr[i]));
+        }
+        if (resultTotal==idsStr.length){
+            result.setErrres(1);
+            result.setErrmsg("数据删除成功！");
+        }else {
+            result.setErrmsg("删除失败");
+        }
+        return result;
+    }
 }
