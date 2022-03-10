@@ -31,7 +31,7 @@
     <delete id="deleteShares" parameterType="int">
         delete from ffms.t_shares where id = #{id}
     </delete>
-    <select id="findShareName">
+    <select id="findShareName" resultType="shares">
         select id,sharesname from ffms.t_shares
     </select>
     <sql id="setShares">
