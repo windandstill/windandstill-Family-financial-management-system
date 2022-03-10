@@ -225,7 +225,13 @@ public class UserController {
             result.setErrres(1);
         }
         return result;
-
     }
 
+    /**
+     * 用户登出
+     */
+    @RequestMapping("logout")
+    public String logout(){
+        return "login";
+    }
 }
