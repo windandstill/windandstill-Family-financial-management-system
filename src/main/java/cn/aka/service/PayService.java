@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface PayService {
-    List<Pay> findPay(Pay pay);
+    List<Pay> findPay(Map map);
     Long getTotalPay(Pay pay);
     int updatePay(Pay pay);
     int addPay(Pay pay);

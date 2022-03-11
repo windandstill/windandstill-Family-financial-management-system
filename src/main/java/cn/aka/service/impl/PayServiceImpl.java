@@ -17,8 +17,8 @@ public class PayServiceImpl implements PayService {
     @Autowired
     private PayMapper payMapper;
     @Override
-    public List<Pay> findPay(Pay pay) {
-        return payMapper.findPay(pay);
+    public List<Pay> findPay(Map map) {
+        return payMapper.findPay(map);
     }
 
     @Override

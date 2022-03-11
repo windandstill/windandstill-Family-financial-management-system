@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface IncomeMapper {
-    List<Income> findIncome(Income income);
+    List<Income> findIncome(Map map);
     Long getTotalIncome(Income income);
     int updateIncome(Income  income);
     int addIncome(Income income);

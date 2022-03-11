@@ -18,8 +18,8 @@ public class IncomeServiceImpl implements IncomeService {
     @Autowired
     private IncomeMapper incomeMapper;
     @Override
-    public List<Income> findIncome(Income income) {
-        return incomeMapper.findIncome(income);
+    public List<Income> findIncome(Map map) {
+        return incomeMapper.findIncome(map);
     }
 
     @Override

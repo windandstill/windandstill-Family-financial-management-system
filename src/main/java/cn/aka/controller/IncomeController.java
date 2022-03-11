@@ -64,7 +64,7 @@ public class IncomeController {
         map.put("userid", s_income.getUserid());
         map.put("start", pageBean.getStart());
         map.put("size", pageBean.getPageSize());
-        List<Income> incomeList = incomeService.findIncome(s_income);
+        List<Income> incomeList = incomeService.findIncome(map);
         Long total = incomeService.getTotalIncome(s_income);
         JSONObject result = new JSONObject();
         JSONArray jsonArray = JSONArray.fromObject(incomeList);

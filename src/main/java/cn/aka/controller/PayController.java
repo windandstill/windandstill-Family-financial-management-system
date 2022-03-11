@@ -66,7 +66,7 @@ public class PayController {
         map.put("userid", s_pay.getUserid());
         map.put("start", pageBean.getStart());
         map.put("size", pageBean.getPageSize());
-        List<Pay> payList = payService.findPay(s_pay);
+        List<Pay> payList = payService.findPay(map);
         Long total = payService.getTotalPay(s_pay);
         JSONObject result = new JSONObject();
         JSONArray jsonArray = JSONArray.fromObject(payList);
