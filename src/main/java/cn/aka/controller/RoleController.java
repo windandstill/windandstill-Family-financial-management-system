@@ -36,10 +36,8 @@ public class RoleController {
         map.put("rolename",role.getRolename());
         map.put("start",pageBean.getStart());
         map.put("pageSize",pageBean.getPageSize());
-        List<Role> allRoleByPage = roleService.findAllRoleByPage(map);
-        long total=allRoleByPage.size();
-        roleResultBean.setTotal(total);
-        roleResultBean.setRows(allRoleByPage);
+        roleResultBean.setTotal(roleService.findAllRoleByTotal(map));
+        roleResultBean.setRows(roleService.findAllRoleByPage(map));
         return roleResultBean;
     }
 

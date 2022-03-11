@@ -225,19 +225,15 @@ public class UserController {
             result.setErrres(1);
         }
         return result;
-
     }
 
-
-
-
-
-    @RequestMapping("datadicManage")
-    public String datadicManage() {
-        return "datadicManage";
+    /**
+     * 用户登出
+     */
+    @RequestMapping("logout")
+    public ModelAndView logout(ModelAndView modelAndView){
+        modelAndView.addObject("roles",roleService.getAllRole());
+        modelAndView.setViewName("loginx`");
+        return modelAndView;
     }
-
-
-
-
 }

@@ -46,4 +46,10 @@ public class SharesServiceImpl implements SharesService {
     public int deleteShares(Integer id) {
         return sharesMapper.deleteShares(id);
     }
+
+    @Override
+    public List<Shares> findShareName() {
+        return sharesMapper.findShareName();
+    }
+
 }

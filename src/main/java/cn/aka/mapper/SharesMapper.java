@@ -15,4 +15,6 @@ public interface SharesMapper {
     int updateShares(Shares shares);
 
     int deleteShares(Integer id);
+
+    List<Shares> findShareName();
 }

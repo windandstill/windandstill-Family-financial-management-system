@@ -17,6 +17,11 @@ public interface RoleService {
     List<Role> findAllRoleByPage(Map<String, Object> map);
 
     /**
+     * 总计所有角色数量
+     */
+    int findAllRoleByTotal(Map map);
+
+    /**
      * 添加角色
      */
     int addRole(Role role);

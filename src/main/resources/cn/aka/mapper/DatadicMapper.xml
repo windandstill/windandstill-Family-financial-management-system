@@ -1,7 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.aka.mapper.DatadicMapper">
-<select id="findDatadicValueByName" parameterType="string" resultType="datadic">
+    <insert id="addDatadic" parameterType="datadic">
+        insert into ffms.t_datadic (datadicname, datadicvalue) VALUE (#{datadicname},#{datadicvalue})
+    </insert>
+
+    <update id="updateDatadic">
+        update ffms.t_datadic
+        <set>
+            <if test="datadicname!=null and datadicname!='' ">
+                datadicname=#{datadicname},
+            </if>
+            <if test="datadicvalue!=null and datadicvalue!='' ">
+                datadicvalue=#{datadicvalue}
+            </if>
+        </set>
+        where id=#{id};
+    </update>
+    <delete id="deleteDatadic" parameterType="int">
+        delete from ffms.t_datadic where id=#{id}
+    </delete>
+
+    <select id="findDatadicValueByName" parameterType="string" resultType="datadic">
     select * from ffms.t_datadic where datadicname = #{datadicname}
-</select>
+    </select>
+    <select id="findAllDataticName" resultType="datadic">
+        select distinct datadicname from ffms.t_datadic
+    </select>
+    <select id="findAllDatadicByPage" parameterType="map" resultType="cn.aka.pojo.Datadic">
+        select * from ffms.t_datadic
+        <where>
+            <if test="datadicname!=null and datadicname!=''">
+                and datadicname like "%"#{datadicname}"%"
+            </if>
+            <if test="datadicvalue!=null and datadicvalue!=''">
+                and datadicvalue like "%"#{datadicvalue}"%"
+            </if>
+        </where>
+        limit #{start},#{pageSize};
+    </select>
+
+    <select id="findAllDatadicByTotal" resultType="java.lang.Integer">
+        select count(*) from ffms.t_datadic
+        <where>
+            <if test="datadicname!=null and datadicname!=''">
+                and datadicname like "%"#{datadicname}"%"
+            </if>
+            <if test="datadicvalue!=null and datadicvalue!=''">
+                and datadicvalue like "%"#{datadicvalue}"%"
+            </if>
+        </where>
+    </select>
+
+    <select id="findDatadicValueAndName" parameterType="datadic" resultType="datadic">
+        select * from ffms.t_datadic where datadicname=#{datadicname} and datadicvalue=#{datadicvalue}
+    </select>
 </mapper>
