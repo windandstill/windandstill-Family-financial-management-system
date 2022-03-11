@@ -6,5 +6,4 @@ import java.util.List;
 
 public interface DatadicService {
     List<Datadic> findDatadicValueByName(String datadicName);
-
 }

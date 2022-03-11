@@ -8,6 +8,8 @@ import cn.aka.service.IncomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +29,17 @@ public class IncomeServiceImpl implements IncomeService {
 
     @Override
     public int updateIncome(Income income) {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        income.setUpdatetime(sdf.format(date));
         return incomeMapper.updateIncome(income);
     }
 
     @Override
     public int addIncome(Income income) {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        income.setCreatetime(sdf.format(date));
         return incomeMapper.addIncome(income);
     }
 

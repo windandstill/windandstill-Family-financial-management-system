@@ -1,7 +1,11 @@
 package cn.aka.controller;
 
 import cn.aka.pojo.*;
-import cn.aka.service.*;
+import cn.aka.service.DatadicService;
+import cn.aka.service.PayService;
+import cn.aka.service.PayService;
+import cn.aka.service.SecurityService;
+import cn.aka.service.UserService;
 import cn.aka.util.ResponseUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -12,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -21,12 +24,12 @@ import java.util.Map;
 
 
 @Controller
-public class IncomeController {
+public class PayController {
     @Autowired
     private DatadicService datadicService;
 
     @Autowired
-    private IncomeService incomeService;
+    private PayService payService;
 
     @Autowired
     private UserService userService;
@@ -34,13 +37,12 @@ public class IncomeController {
     @Autowired
     private SecurityService securityService;
 
-
-    @RequestMapping("incomeManage")
+    @RequestMapping("payManage")
     @ResponseBody
-    public ModelAndView incomeManage(HttpServletRequest request) {
+    public ModelAndView payManage(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView();
-        List<Datadic> datadics = datadicService.findDatadicValueByName("收入类型");
-        mv.addObject("incomes", datadics);
+        List<Datadic> datadics = datadicService.findDatadicValueByName("支出类型");
+        mv.addObject("pays", datadics);
         User user = (User) request.getSession().getAttribute("currentUser");
         Map<String, Object> userMap = new HashMap<String, Object>();
         userMap.put("userid", user.getId());
@@ -49,39 +51,39 @@ public class IncomeController {
         mv.addObject("allUsers",allUsers);
         return mv;
     }
-    @RequestMapping("incomelist")
+    @RequestMapping("paylist")
     public String list(@RequestParam(value = "page", required = false) String page,
-                       @RequestParam(value = "rows", required = false) String rows, Income s_income, HttpServletResponse response)
+                       @RequestParam(value = "rows", required = false) String rows, Pay s_pay, HttpServletResponse response)
             throws Exception {
         PageBean pageBean = new PageBean(Integer.parseInt(page), Integer.parseInt(rows));
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("incomer", s_income.getIncomer());
-        map.put("source", s_income.getSource());
-        map.put("dataid", s_income.getDataid());
-        map.put("starttime", s_income.getStarttime());
-        map.put("endtime", s_income.getEndtime());
-        map.put("roleid", s_income.getRoleid());
-        map.put("userid", s_income.getUserid());
+        map.put("payer", s_pay.getPayer());
+        map.put("tword", s_pay.getTword());
+        map.put("dataid", s_pay.getDataid());
+        map.put("starttime", s_pay.getStarttime());
+        map.put("endtime", s_pay.getEndtime());
+        map.put("roleid", s_pay.getRoleid());
+        map.put("userid", s_pay.getUserid());
         map.put("start", pageBean.getStart());
         map.put("size", pageBean.getPageSize());
-        List<Income> incomeList = incomeService.findIncome(s_income);
-        Long total = incomeService.getTotalIncome(s_income);
+        List<Pay> payList = payService.findPay(s_pay);
+        Long total = payService.getTotalPay(s_pay);
         JSONObject result = new JSONObject();
-        JSONArray jsonArray = JSONArray.fromObject(incomeList);
+        JSONArray jsonArray = JSONArray.fromObject(payList);
         result.put("rows", jsonArray);
         result.put("total", total);
         ResponseUtil.write(response, result);
         return null;
     }
-    @RequestMapping("incomesave")
+    @RequestMapping("paysave")
     @ResponseBody
-    public Result save(Income income) {
+    public Result save(Pay pay) {
         Result result = new Result();
         int total = 0;
-        if (income.getId() == null) {
-            total = incomeService.addIncome(income);
+        if (pay.getId() == null) {
+            total = payService.addPay(pay);
         }else {
-            total = incomeService.updateIncome(income);
+            total = payService.updatePay(pay);
         }
         if (total > 0) {
             result.setErrres(200);
@@ -93,14 +95,14 @@ public class IncomeController {
         return result;
     }
 
-    @RequestMapping("incomedelete")
+    @RequestMapping("paydelete")
     @ResponseBody
     public Result delete(@RequestParam(value = "ids")String ids) {
         Result result = new Result();
         int total = 0;
         String[] idsStr = ids.split(",");
         for (int i = 0; i < idsStr.length; i++) {
-            incomeService.deleteIncome(Integer.parseInt(idsStr[i]));
+            payService.deletePay(Integer.parseInt(idsStr[i]));
         }
         result.setErrres(200);
         result.setErrmsg("删除成功!!!");
