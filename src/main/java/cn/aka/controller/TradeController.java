@@ -32,7 +32,6 @@ public class TradeController {
     @RequestMapping("tradeManage")
     @ResponseBody
     public ModelAndView tradeManage(HttpServletRequest request) {
-        System.out.println("113314");
         ModelAndView mv = new ModelAndView();
         List<Datadic> datadics = datadicService.findDatadicValueByName("证券流水账类型");
         mv.addObject("trades",datadics);
