@@ -231,7 +231,9 @@ public class UserController {
      * 用户登出
      */
     @RequestMapping("logout")
-    public String logout(){
-        return "login";
+    public ModelAndView logout(ModelAndView modelAndView){
+        modelAndView.addObject("roles",roleService.getAllRole());
+        modelAndView.setViewName("loginx`");
+        return modelAndView;
     }
 }
