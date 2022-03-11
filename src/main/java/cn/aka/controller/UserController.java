@@ -233,7 +233,7 @@ public class UserController {
     @RequestMapping("logout")
     public ModelAndView logout(ModelAndView modelAndView){
         modelAndView.addObject("roles",roleService.getAllRole());
-        modelAndView.setViewName("loginx`");
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 }
