@@ -28,6 +28,7 @@ public class TradeServiceImpl implements TradeService {
 
     @Override
     public int addTrade(Trade trade) {
+        trade.setMoney(trade.getPrice()*trade.getNumber());
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         trade.setCreatetime(sdf.format(date));
