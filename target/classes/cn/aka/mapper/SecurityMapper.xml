@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.aka.mapper.SecurityMapper">
+
+    <!--查询的表t_security\t_user\t_user_role\t_datadic-->
+    <select id="findSecurityById" resultType="security" parameterType="securityVo">
+        SELECT *
+        FROM ffms.t_security a
+        inner join t_user b on a.userid = b.id
+        inner join t_user_role c on a.userid = c.userid
+        inner join t_datadic d on a.dataid = d.id
+        <include refid="securityWhere"/>
+        <if test="start!=null and size!=null">
+            limit #{start},#{size}
+        </if>
+    </select>
+
+    <select id="findCount" parameterType="securityVo" resultType="int">
+        SELECT COUNT(*)
+        FROM t_security a
+        inner join t_user b on a.userid = b.id
+        inner join t_user_role c on a.userid = c.userid
+        inner join t_datadic d on a.dataid = d.id
+        <include refid="securityWhere"/>
+    </select>
+
+    <select id="getAllUsers" parameterType="Map" resultType="user">
+        select id,username from t_user
+        <where>
+            -- 判断用户是否有效的条件
+            isvalid=1
+            -- 普通用户
+            <if test="userid!=null and roleid!=1">
+                and id=#{userid}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addSecurity" parameterType="security">
+        insert into t_security
+        values (null, #{userid}, #{securityname}, #{securitypassward}, #{company}, #{dataid}, #{starttime}, #{endtime},
+                #{createtime}, null);
+    </insert>
+
+    <update id="updateSecurity" parameterType="security">
+        update t_security
+        <include refid="setSecurity"/>
+    </update>
+
+    <delete id="deleteSecurity" parameterType="int">
+        delete from ffms.t_security where id = #{id}
+    </delete>
+    
+    <select id="getAllSecurity" resultType="security">
+        select id,securityname from ffms.t_security
+    </select>
+
+<sql id="setSecurity">
+    <set>
+        <if test="userid!=null and userid!='' ">
+            userid=#{userid},
+        </if>
+        <if test="securityname!=null and securityname!='' ">
+            securityname=#{securityname},
+        </if>
+        <if test="securitypassward!=null and securitypassward!='' ">
+            securitypassward=#{securitypassward},
+        </if>
+        <if test="company!=null and company!='' ">
+            company=#{company},
+        </if>
+        <if test="dataid!=null and dataid!='' ">
+            dataid=#{dataid},
+        </if>
+        <if test="starttime!=null and starttime!='' ">
+            starttime=#{starttime},
+        </if>
+        <if test="endtime!=null and endtime!='' ">
+            endtime=#{endtime},
+        </if>
+        updatetime=#{updatetime}
+    </set>
+        where id=#{id}
+</sql>
+    <sql id="securityWhere">
+        <where>
+            <if test="username!=null and username!=''">
+                and b.username like '%${username}%'
+            </if>
+            <if test="company!=null and company!=''">
+                and a.company like '%${company}%'
+            </if>
+            <if test="dataid!=null and dataid!=''">
+                and a.dataid = #{dataid}
+            </if>
+            <if test="searchStarttime!=null and searchStarttime!='' ">
+                and a.starttime&gt;=#{searchStarttime}
+            </if>
+            <if test="searchEndtime!=null and searchEndtime!='' ">
+                and a.endtime&lt;=#{searchEndtime}
+            </if>
+            <if test="userid!=null and roleid!=1">
+                and a.userid = #{userid}
+            </if>
+        </where>
+    </sql>
+</mapper>

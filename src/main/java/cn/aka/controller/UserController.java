@@ -5,6 +5,7 @@ import cn.aka.service.RoleService;
 import cn.aka.service.UserService;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -172,7 +173,7 @@ public class UserController {
             }
         }else {
             User userByUsername = userService.findUserByUsername(user);
-            if (userByUsername!=null && (!(userByUsername.getUsername().equals(user.getUsername())))){
+            if (userByUsername!=null && (userByUsername.getUsername().equals(user.getUsername()))){
                 result.setErrmsg("用户名已被使用");
                 return result;
             }
@@ -236,4 +237,6 @@ public class UserController {
         modelAndView.setViewName("login");
         return modelAndView;
     }
+
+
 }
